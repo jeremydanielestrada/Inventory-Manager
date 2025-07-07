@@ -6,7 +6,7 @@ const formData = ref({
     lastName: "",
     email: "",
     password: "",
-    password_confirmation,
+    password_confirmation: "",
 });
 
 const isPasswordVisible = ref(false);
@@ -29,7 +29,7 @@ const isPasswordVisible = ref(false);
                 ></v-text-field>
             </v-col>
 
-            <v-col cols="12" sm="6">
+            <v-col cols="12">
                 <v-text-field
                     v-model="formData.email"
                     label="Email"
@@ -62,5 +62,7 @@ const isPasswordVisible = ref(false);
                 ></v-text-field>
             </v-col>
         </v-row>
+
+        <v-btn type="submit" color="teal-darken-2" block> Submit </v-btn>
     </v-form>
 </template>

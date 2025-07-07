@@ -6,13 +6,18 @@ use Inertia\Inertia;
 //Public Routes
 
 
-
-
-
 Route::get('/', function(){
-    return Inertia::render('Home');
-});
+    return Inertia::render('Auth/Login');
+})->name('login');
+
+Route::inertia('/register', 'Auth/Register')->name('register'); //register
 
 
 
-Route::inertia('/about', 'About');
+
+
+// Route::get('/', function(){
+//     return Inertia::render('Home');
+// });
+
+// Route::inertia('/about', 'About');

@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 const formData = ref({
     email: "",
     password: "",
@@ -10,7 +11,7 @@ const isPasswordVisible = ref(false);
 <template>
     <v-form>
         <v-row dense>
-            <v-col cols="12" sm="6">
+            <v-col cols="12">
                 <v-text-field
                     v-model="formData.email"
                     label="email"
@@ -19,11 +20,11 @@ const isPasswordVisible = ref(false);
                 </v-text-field>
             </v-col>
 
-            <v-col cols="12" sm="6">
+            <v-col cols="12">
                 <v-text-field
                     v-model="formData.password"
-                    lable="password"
-                    prepend-nner-icon="mdi-lock-outline"
+                    label="password"
+                    prepend-inner-icon="mdi-lock-outline"
                     :type="isPasswordVisible ? 'text' : 'password'"
                     :append-inner-icon="
                         isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'
@@ -39,8 +40,6 @@ const isPasswordVisible = ref(false);
             color="teal-darken-2"
             prepend-icon="mdi-login"
             block
-            loading=""
-            disabled=""
         >
             Login
         </v-btn>
