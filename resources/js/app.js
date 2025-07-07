@@ -14,9 +14,14 @@ import * as directives from "vuetify/directives";
 import AppLayout from "./Layouts/AppLayout.vue";
 import "@mdi/font/css/materialdesignicons.css";
 
+const savedTheme = localStorage.getItem("theme") || "light";
+
 const vuetify = createVuetify({
     components,
     directives,
+    theme: {
+        defaultTheme: savedTheme,
+    },
 });
 
 createInertiaApp({

@@ -1,32 +1,42 @@
 <script setup>
 import { ref } from "vue";
+import { useTheme } from "vuetify";
 
-const theme = ref("light");
+const theme = useTheme();
+const currentTheme = ref(theme.global.name.value);
 
-function onClick() {
-    theme.value = theme.value === "light" ? "dark" : "light";
-    localStorage.setItem("theme", theme.value);
+function onToggleTheme() {
+    const newTheme = currentTheme.value === "light" ? "dark" : "light";
+    theme.global.name.value = newTheme;
+    currentTheme.value = newTheme;
+    localStorage.setItem("theme", newTheme);
 }
+
+console.log("Current theme:", theme.global.name.value);
 </script>
 
 <template>
     <v-responsive class="border rounded">
-        <v-app :theme="theme">
+        <v-app :theme="currentTheme">
             <v-app-bar
                 class="px-3"
                 border
-                :color="theme === 'light' ? 'teal-lighten-2' : 'teal-darken-2'"
+                :color="
+                    currentTheme === 'light'
+                        ? 'teal-lighten-2'
+                        : 'teal-darken-2'
+                "
             >
                 <v-spacer></v-spacer>
 
                 <v-btn
                     :prepend-icon="
-                        theme === 'light'
+                        currentTheme === 'light'
                             ? 'mdi-weather-sunny'
                             : 'mdi-weather-night'
                     "
                     slim
-                    @click="onClick"
+                    @click="onToggleTheme"
                 ></v-btn>
             </v-app-bar>
 

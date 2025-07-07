@@ -1,10 +1,13 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const theme = ref(localStorage.getItem("theme") ?? "light");
+
+const onThemeUpdate = (value) => {
+    theme.value = value;
+};
+</script>
 
 <template>
-    <Head :title="$page.component" />
-    <h1>Home</h1>
-    <v-btn>
-        <v-icon>mdi-pen</v-icon>
-        asd
-    </v-btn>
+    <Head title="Home"></Head>
 </template>
