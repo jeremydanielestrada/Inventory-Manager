@@ -3,18 +3,22 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
 const formData = useForm({
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    password_confirmation: null,
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    role: "User",
 });
 
 const isPasswordVisible = ref(false);
 const isPasswordConfirmVisible = ref(false);
 
 const handleSubmit = () => {
-    formData.post("/register");
+    formData.post("/register", {
+        onError: () => formData.reset(),
+        onSuccess: () => form.reset("password"),
+    });
 };
 </script>
 
@@ -88,7 +92,14 @@ const handleSubmit = () => {
             </v-col>
         </v-row>
 
-        <v-btn type="submit" color="teal-darken-2" block class="mt-3">
+        <v-btn
+            type="submit"
+            color="teal-darken-2"
+            block
+            class="mt-3"
+            :disabled="formData.processing"
+            :loading="formData.processing"
+        >
             Submit
         </v-btn>
     </v-form>

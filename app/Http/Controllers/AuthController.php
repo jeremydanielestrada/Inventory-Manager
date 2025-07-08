@@ -3,22 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\userRequest;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
-class AuthController
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+class AuthController extends Controller
 {
 
 
-    public function register(userRequest $request){
+    public function register(UserRequest $request){
 
             sleep(1);
 
             //Validate
-            $request->validated();
+            $validated = $request->validated();
 
-            // $validated['password'] = Hash::make($validated['password']);
+            //Encrypt password using Hash class/function
+            $validated['password'] = Hash::make($validated['password']);
 
-            dd('pass');
+            //Regitser
+            $user = User::create($validated);
+
+            //Login
+            Auth::login($user);
+
+            //Redirect
+            return redirect()->route('dashboard');
+
 
     }
-}
+};
