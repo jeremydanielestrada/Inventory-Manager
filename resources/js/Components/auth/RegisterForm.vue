@@ -1,13 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import TextInput from "../TextInput.vue";
 
+//Load Variables
 const formData = useForm({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
     role: "User",
 });
 
@@ -26,53 +28,61 @@ const handleSubmit = () => {
     <v-form @submit.prevent="handleSubmit">
         <v-row dense>
             <v-col cols="12" sm="6">
-                <v-text-field
+                <TextInput
+                    name="First Name"
+                    type="text"
                     v-model="formData.firstName"
-                    label="First Name"
-                ></v-text-field>
-                <small v-if="formData.errors.firstName">{{
-                    formData.errors.firstName
-                }}</small>
+                    :message="formData.errors.firstName"
+                />
             </v-col>
 
             <v-col cols="12" sm="6">
-                <v-text-field
+                <TextInput
+                    name="Last Name"
+                    type="text"
                     v-model="formData.lastName"
-                    label="Last Name"
-                ></v-text-field>
-                <small v-if="formData.errors.lastName">{{
-                    formData.errors.lastName
-                }}</small>
+                    :message="formData.errors.lastName"
+                />
             </v-col>
 
             <v-col cols="12">
-                <v-text-field
+                <TextInput
+                    prepend-icon="mdi-email-outline"
+                    name="Email"
+                    type="email"
                     v-model="formData.email"
-                    label="Email"
-                ></v-text-field>
-                <small v-if="formData.errors.email">{{
-                    formData.errors.email
-                }}</small>
+                    :message="formData.errors.email"
+                />
             </v-col>
 
             <v-col cols="12" sm="6">
-                <v-text-field
+                <!-- <v-text-field
                     v-model="formData.password"
                     label="Password"
-                    prepend-nner-icon="mdi-lock-outline"
+                    prepend-inner-icon="mdi-lock-outline"
                     :type="isPasswordVisible ? 'text' : 'password'"
                     :append-inner-icon="
                         isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'
                     "
                     @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                ></v-text-field>
+                ></v-text-field> -->
+
+                <TextInput
+                    name="Password"
+                    :type="isPasswordVisible ? 'text' : 'password'"
+                    v-model="formData.password"
+                    :message="formData.errors.password"
+                    prependIcon="mdi-lock-outline"
+                    :appendIcon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+                    @append-click="isPasswordVisible = !isPasswordVisible"
+                />
             </v-col>
 
             <v-col cols="12" sm="6">
-                <v-text-field
+                <!-- <v-text-field
                     v-model="formData.password_confirmation"
                     label=" Confirm Password"
-                    prepend-nner-icon="mdi-lock-outline"
+                    prepend-inner-icon="mdi-lock-outline"
                     :type="isPasswordConfirmVisible ? 'text' : 'password'"
                     :append-inner-icon="
                         isPasswordConfirmVisible ? 'mdi-eye-off' : 'mdi-eye'
@@ -83,12 +93,21 @@ const handleSubmit = () => {
                 ></v-text-field>
                 <small v-if="formData.errors.password_confirmation"
                     >{{ formData.errors.password_confirmation }}
-                </small>
-            </v-col>
-            <v-col cols="12">
-                <small v-if="formData.errors.password" class="">{{
-                    formData.errors.password
-                }}</small>
+                </small> -->
+
+                <TextInput
+                    name="Password"
+                    :type="isPasswordConfirmVisible ? 'text' : 'password'"
+                    v-model="formData.password_confirmation"
+                    :message="formData.errors.password_confirmation"
+                    prependIcon="mdi-lock-outline"
+                    :appendIcon="
+                        isPasswordConfirmVisible ? 'mdi-eye-off' : 'mdi-eye'
+                    "
+                    @append-click="
+                        isPasswordConfirmVisible = !isPasswordConfirmVisible
+                    "
+                />
             </v-col>
         </v-row>
 
@@ -104,9 +123,3 @@ const handleSubmit = () => {
         </v-btn>
     </v-form>
 </template>
-
-<style scoped>
-small {
-    color: #d50000;
-}
-</style>
