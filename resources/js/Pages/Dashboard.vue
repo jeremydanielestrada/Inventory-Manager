@@ -4,5 +4,5 @@ import { ref } from "vue";
 
 <template>
     <Head title="Dashboard"></Head>
-    <h1>Dashoard</h1>
+    <h1>Welcome to dashboard {{ $page.props.auth.user.firstName }}</h1>
 </template>

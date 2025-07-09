@@ -25,9 +25,6 @@ defineProps({
     appendIcon: {
         type: String,
     },
-    isPasswordVisible: {
-        type: Boolean,
-    },
 });
 </script>
 

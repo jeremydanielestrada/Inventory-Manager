@@ -1,45 +1,60 @@
 <script setup>
 import { ref } from "vue";
-const formData = ref({
+import TextInput from "../TextInput.vue";
+import { useForm } from "@inertiajs/vue3";
+
+const formData = useForm({
     email: "",
     password: "",
+    remember: null,
 });
 
 const isPasswordVisible = ref(false);
+
+const handleSubmit = () => {
+    formData.post("/login", {
+        onError: () => formData.reset(),
+    });
+};
 </script>
 
 <template>
-    <v-form>
+    <v-form @submit.prevent="handleSubmit">
         <v-row dense>
             <v-col cols="12">
-                <v-text-field
+                <TextInput
+                    name="Email"
+                    type="email"
                     v-model="formData.email"
-                    label="email"
-                    prepend-inner-icon="mdi-email-outline"
-                >
-                </v-text-field>
+                    prependIcon="mdi-email-outline"
+                    :message="formData.errors.email"
+                />
             </v-col>
 
             <v-col cols="12">
-                <v-text-field
-                    v-model="formData.password"
-                    label="password"
-                    prepend-inner-icon="mdi-lock-outline"
+                <TextInput
+                    name="Password"
                     :type="isPasswordVisible ? 'text' : 'password'"
-                    :append-inner-icon="
-                        isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'
-                    "
-                    @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                >
-                </v-text-field
-            ></v-col>
+                    v-model="formData.password"
+                    :message="formData.errors.password"
+                    prependIcon="mdi-lock-outline"
+                    :appendIcon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+                    @append-click="isPasswordVisible = !isPasswordVisible"
+                />
+            </v-col>
+
+            <v-checkbox
+                label="Remember me"
+                v-model="formData.remember"
+            ></v-checkbox>
         </v-row>
         <v-btn
-            class="mt-2"
             type="submit"
             color="teal-darken-2"
             prepend-icon="mdi-login"
             block
+            :disabled="formData.processing"
+            :loading="formData.processing"
         >
             Login
         </v-btn>

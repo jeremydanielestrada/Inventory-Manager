@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useTheme } from "vuetify";
-
+import { router } from "@inertiajs/vue3";
 const theme = useTheme();
 const currentTheme = ref(theme.global.name.value);
 
@@ -12,7 +12,9 @@ function onToggleTheme() {
     localStorage.setItem("theme", newTheme);
 }
 
-console.log("Current theme:", theme.global.name.value);
+const logout = () => {
+    router.post("/logout");
+};
 </script>
 
 <template>
@@ -38,6 +40,11 @@ console.log("Current theme:", theme.global.name.value);
                     slim
                     @click="onToggleTheme"
                 ></v-btn>
+
+                <v-btn v-if="$page.props.auth.user" @click="logout">
+                    Log out
+                    <v-icon>mdi-logout</v-icon>
+                </v-btn>
             </v-app-bar>
 
             <v-main>

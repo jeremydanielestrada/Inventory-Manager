@@ -96,7 +96,7 @@ const handleSubmit = () => {
                 </small> -->
 
                 <TextInput
-                    name="Password"
+                    name="Confirm Password"
                     :type="isPasswordConfirmVisible ? 'text' : 'password'"
                     v-model="formData.password_confirmation"
                     :message="formData.errors.password_confirmation"
