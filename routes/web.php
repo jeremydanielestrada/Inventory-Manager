@@ -24,7 +24,7 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 
 
-
-Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+///Products view
+Route::inertia('/products', 'Products')->name('products');
 
 

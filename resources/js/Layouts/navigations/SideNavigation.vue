@@ -15,6 +15,7 @@ const { mobile } = useDisplay();
         :temporary="mobile"
         :permanent="!mobile"
         width="325"
+        border
     >
         <v-list>
             <v-list-item title="Navigation drawer"></v-list-item>

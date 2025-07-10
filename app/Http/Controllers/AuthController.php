@@ -29,7 +29,7 @@ class AuthController extends Controller
             Auth::login($user);
 
             //Redirect
-            return redirect()->route('dashboard');
+            return redirect()->route('products');
 
 
     }
@@ -47,7 +47,7 @@ class AuthController extends Controller
         if (Auth::attempt($validate, $request->remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('products');
         }
 
         //return back if there's an error
