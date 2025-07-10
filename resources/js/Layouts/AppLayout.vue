@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, provide, watch } from "vue";
 import { useTheme } from "vuetify";
 import { router } from "@inertiajs/vue3";
 const theme = useTheme();
@@ -11,6 +11,19 @@ function onToggleTheme() {
     currentTheme.value = newTheme;
     localStorage.setItem("theme", newTheme);
 }
+const isDrawerVisible = ref(localStorage.getItem("drawer") === "true"); // restore state
+
+function toggleDrawer() {
+    isDrawerVisible.value = !isDrawerVisible.value;
+}
+
+watch(isDrawerVisible, (val) => {
+    localStorage.setItem("drawer", val);
+});
+
+//Provide values
+provide("isDrawerVisible", isDrawerVisible);
+provide("toggleDrawer", toggleDrawer);
 
 const logout = () => {
     router.post("/logout");
@@ -29,6 +42,13 @@ const logout = () => {
                         : 'teal-darken-2'
                 "
             >
+                <v-app-bar-nav-icon
+                    icon="mdi-menu"
+                    :theme="currentTheme"
+                    @click="toggleDrawer"
+                >
+                </v-app-bar-nav-icon>
+
                 <v-spacer></v-spacer>
 
                 <v-btn
@@ -46,6 +66,7 @@ const logout = () => {
                     <v-icon>mdi-logout</v-icon>
                 </v-btn>
             </v-app-bar>
+            <slot name="navigation"></slot>
 
             <v-main>
                 <v-container>
