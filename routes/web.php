@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 //Public Routes
 
@@ -25,6 +26,6 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 
 ///Products view
-Route::inertia('/products', 'Products')->name('products');
+Route::get('/products',[ ProductController::class, 'index'])->name('products');
 
 

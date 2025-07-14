@@ -7,13 +7,17 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
 
     public function index()
     {
-        return Product::all();
+       $products = Product::latest()->with('category')->paginate(10);
+
+       return Inertia::render('Products',
+          ['products'=> $products]);
     }
 
 

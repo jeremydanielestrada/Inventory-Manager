@@ -1,13 +1,28 @@
 <script setup>
 import { ref } from "vue";
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
+import ProductCard from "@/Components/ProductCard.vue";
+
+defineProps({
+    products: Object,
+});
 </script>
 
 <template>
-    <Head title="Dashboard"></Head>
+    <Head title="Products"></Head>
     <SideNavigation></SideNavigation>
 
-    <h1 v-if="$page.props.auth.user?.firstName">
-        Welcome to dashboard {{ $page.props.auth.user.firstName }}
-    </h1>
+    <v-row v-if="Object.keys(products.data).length">
+        <v-col
+            v-for="product in products.data"
+            :key="product.id"
+            cols="12"
+            sm="6"
+            md="8"
+            lg="5"
+            xl="3"
+        >
+            <ProductCard :product="product" />
+        </v-col>
+    </v-row>
 </template>
