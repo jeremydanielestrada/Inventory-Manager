@@ -12,12 +12,19 @@ use Inertia\Inertia;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-       $products = Product::latest()->with('category')->paginate(5);
+       $products = Product::with('category')
+       ->filter(request(['search']))
+       ->latest()
+       ->paginate(5)
+       ->withQueryString();
 
        return Inertia::render('Products',
-          ['products'=> $products]);
+          [
+            'products'=> $products,
+            'searchTerm'=> $request->search,
+        ]);
     }
 
 

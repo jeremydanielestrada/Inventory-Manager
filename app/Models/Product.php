@@ -22,4 +22,18 @@ protected $fillable = ['
 
    ];
 
+
+
+
+    //For filtering
+   public function scopeFilter($query, array $filters){
+
+       if ($filters['search'] ?? false) {
+            $query
+            ->where('product_name', 'like', '%' . request('search') . '%')
+            ->orWhere('description', 'like', '%' . request('search') . '%');
+        }
+
+          }
+
 }
