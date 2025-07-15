@@ -8,9 +8,18 @@ import { useForm, router } from "@inertiajs/vue3";
 const props = defineProps({
     products: Object,
     searchTerm: String,
+    categories: Array,
 });
 
-const categories = ref(["Category 1", "Category 2", "Category 3"]);
+const selectCategories = ref(props.selectedCategory ?? null);
+
+function filterByCategory(categoryId) {
+    router.get(
+        route("products"),
+        { category: categoryId },
+        { preserveState: true, preserveScroll: true }
+    );
+}
 
 const form = useForm({
     search: props.searchTerm,
@@ -32,18 +41,22 @@ const returnHome = () => {
     <!-- for checking the link -->
     {{ console.log(products.data) }}
     <v-row class="d-flex align-center justify-space-between">
-        <v-col cols="12" sm="6" md="12" lg="2">
+        <v-col cols="12" sm="6" md="6" lg="2">
             <v-select
-                density="compact"
-                clearable
-                chips
-                label="Select Category"
-                variant="outlined"
+                v-model="selectCategories"
                 :items="categories"
+                item-title="category_name"
+                item-value="id"
+                label="Select Category"
+                clearable
+                @update:modelValue="filterByCategory"
+                variant="outlined"
+                density="compact"
+                chips
             ></v-select>
         </v-col>
 
-        <v-col cols="12" sm="6" md="12" lg="3">
+        <v-col cols="12" sm="6" md="6" lg="3">
             <v-form @submit.prevent="search">
                 <v-text-field
                     type="search"

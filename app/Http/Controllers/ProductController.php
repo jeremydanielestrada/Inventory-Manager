@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
        $products = Product::with('category')
-       ->filter(request(['search']))
+       ->filter(request(['search', 'category']))
        ->latest()
        ->paginate(5)
        ->withQueryString();
@@ -24,6 +25,8 @@ class ProductController extends Controller
           [
             'products'=> $products,
             'searchTerm'=> $request->search,
+            'categories' => Category::all(),
+            'selectedCategory' => $request->category
         ]);
     }
 

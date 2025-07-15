@@ -1,5 +1,6 @@
 <script setup>
 import { getMoneyText } from "@/utils/helpers";
+
 defineProps({
     product: Object,
 });

@@ -34,6 +34,11 @@ protected $fillable = ['
             ->orWhere('description', 'like', '%' . request('search') . '%');
         }
 
+
+        // if($filters['category'] ?? false) {
+        //         $query->where('category_name', request('category'));
+        // }
+
           }
 
 }
