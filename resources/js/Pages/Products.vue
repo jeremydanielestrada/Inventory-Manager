@@ -4,6 +4,7 @@ import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
 import ProductCard from "@/Components/ProductCard.vue";
 import PaginationLinks from "@/Components/PaginationLinks.vue";
 import { useForm, router } from "@inertiajs/vue3";
+import ProductsFormDialog from "@/Components/common/ProductsFormDialog.vue";
 
 const props = defineProps({
     products: Object,
@@ -11,7 +12,7 @@ const props = defineProps({
     categories: Array,
 });
 
-console.log(props.categories);
+console.log(props.products.data);
 
 function filterByCategory(categoryId) {
     router.get(
@@ -20,6 +21,8 @@ function filterByCategory(categoryId) {
         { preserveState: true, preserveScroll: true }
     );
 }
+
+const isDialogVisible = ref(false);
 
 const form = useForm({
     search: props.searchTerm,
@@ -44,10 +47,9 @@ const refreshFilter = () => {
 <template>
     <Head title="Products"></Head>
     <SideNavigation></SideNavigation>
-    <!-- for checking the link -->
-    {{ console.log(products.data) }}
+
     <v-row class="d-flex align-center justify-space-between">
-        <v-col cols="12" sm="6" md="6" lg="2" class="d-flex ga-2 align-center">
+        <v-col cols="12" sm="4" md="4" lg="3" class="d-flex ga-2 align-center">
             <v-select
                 :items="categories"
                 item-title="category_name"
@@ -55,13 +57,22 @@ const refreshFilter = () => {
                 label="Select Category"
                 clearable
                 @update:modelValue="filterByCategory"
-                variant="outlined"
+                variant="solo-filled"
                 density="compact"
                 chips
             ></v-select>
 
             <v-btn icon size="30" class="mb-5" @click="refreshFilter">
                 <v-icon>mdi-refresh</v-icon>
+            </v-btn>
+
+            <v-btn
+                icon
+                size="30"
+                class="mb-5"
+                @click="isDialogVisible = !isDialogVisible"
+            >
+                <v-icon>mdi-plus</v-icon>
             </v-btn>
         </v-col>
 
@@ -113,4 +124,5 @@ const refreshFilter = () => {
 
     <!-- Pagination -->
     <PaginationLinks :paginator="products" />
+    <ProductsFormDialog v-model:isDialogVisible="isDialogVisible" />
 </template>

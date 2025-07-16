@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 //Public Routes
 
@@ -25,7 +26,14 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 
 
-///Products view
+///Products
 Route::get('/products',[ ProductController::class, 'index'])->name('products');
+Route::post('/products',[ ProductController::class, 'store'])->name('products.store');
+
+
+
+//Category
+Route::post('/category',[ CategoryController::class, 'store'])->name('category.store');
+
 
 

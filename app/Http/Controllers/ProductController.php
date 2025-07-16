@@ -38,10 +38,17 @@ class ProductController extends Controller
     {
 
         $validated = $request->validated() ;
-        $validated['image_path'] = $request->file('image_path')->storePublicly('product', 'public');
+        // $validated['image_path'] = $request->file('image_path')->storePublicly('product', 'public');
+
+        if ($request->hasfile('image_path')){
+           $validated['image_path'] = $request->file('public')->store('product', $request->image_path);
+        }
+
         $validated['user_id'] = $request->user()->id;
 
-       Product::create($validated);
+
+
+         Product::create($validated);
 
     }
 

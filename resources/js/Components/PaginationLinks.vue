@@ -26,5 +26,10 @@ function onPageChange(page) {
             :total-visible="5"
             @update:modelValue="onPageChange"
         ></v-pagination>
+
+        <div v-if="paginator.total > 0" class="mb-2">
+            Showing {{ paginator.from }}-{{ paginator.to }} of
+            {{ paginator.total }} items
+        </div>
     </div>
 </template>

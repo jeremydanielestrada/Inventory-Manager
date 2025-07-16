@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <v-card height="100%" class="d-flex flex-column ga-2">
+    <v-card height="100%" class="d-flex flex-column ga-2" v-if="product">
         <v-card-text>
             <!-- img -->
 
