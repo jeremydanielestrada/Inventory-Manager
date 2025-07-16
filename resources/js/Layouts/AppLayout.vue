@@ -46,6 +46,7 @@ const logout = () => {
                     icon="mdi-menu"
                     :theme="currentTheme"
                     @click="toggleDrawer"
+                    v-if="$page.props.auth.user"
                 >
                 </v-app-bar-nav-icon>
 

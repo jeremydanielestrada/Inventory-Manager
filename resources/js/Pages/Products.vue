@@ -11,7 +11,7 @@ const props = defineProps({
     categories: Array,
 });
 
-const selectCategories = ref(props.selectedCategory ?? null);
+console.log(props.categories);
 
 function filterByCategory(categoryId) {
     router.get(
@@ -33,6 +33,12 @@ const search = () => {
 const returnHome = () => {
     router.get(route("products"));
 };
+
+const refreshFilter = () => {
+    router.get(route("products", { search: null, category: null }));
+
+    console.log("Succesfully refresh filter");
+};
 </script>
 
 <template>
@@ -41,9 +47,8 @@ const returnHome = () => {
     <!-- for checking the link -->
     {{ console.log(products.data) }}
     <v-row class="d-flex align-center justify-space-between">
-        <v-col cols="12" sm="6" md="6" lg="2">
+        <v-col cols="12" sm="6" md="6" lg="2" class="d-flex ga-2 align-center">
             <v-select
-                v-model="selectCategories"
                 :items="categories"
                 item-title="category_name"
                 item-value="id"
@@ -54,6 +59,10 @@ const returnHome = () => {
                 density="compact"
                 chips
             ></v-select>
+
+            <v-btn icon size="30" class="mb-5" @click="refreshFilter">
+                <v-icon>mdi-refresh</v-icon>
+            </v-btn>
         </v-col>
 
         <v-col cols="12" sm="6" md="6" lg="3">

@@ -26,7 +26,6 @@ class ProductController extends Controller
             'products'=> $products,
             'searchTerm'=> $request->search,
             'categories' => Category::all(),
-            'selectedCategory' => $request->category
         ]);
     }
 
