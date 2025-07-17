@@ -29,7 +29,7 @@ defineProps({
 </script>
 
 <template>
-    <v-col cols="12">
+    <v-col cols="12" :sm="type === 'number' ? 6 : ''">
         <v-text-field
             :prepend-inner-icon="prependIcon"
             :append-inner-icon="appendIcon"

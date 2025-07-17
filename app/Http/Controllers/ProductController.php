@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -36,12 +37,15 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+         if (!Auth::check()) {
+        abort(403, 'Not authenticated');
+    }
 
         $validated = $request->validated() ;
         // $validated['image_path'] = $request->file('image_path')->storePublicly('product', 'public');
 
         if ($request->hasfile('image_path')){
-           $validated['image_path'] = $request->file('public')->store('product', $request->image_path);
+           $validated['image_path'] = $request->file('image_path')->store('product', 'public');
         }
 
         $validated['user_id'] = $request->user()->id;
@@ -49,6 +53,7 @@ class ProductController extends Controller
 
 
          Product::create($validated);
+
 
     }
 

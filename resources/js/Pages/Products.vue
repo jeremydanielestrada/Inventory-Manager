@@ -47,6 +47,7 @@ const refreshFilter = () => {
 <template>
     <Head title="Products"></Head>
     <SideNavigation></SideNavigation>
+    <h1>{{ $page.props.auth.user.firstName }}</h1>
 
     <v-row class="d-flex align-center justify-space-between">
         <v-col cols="12" sm="4" md="4" lg="3" class="d-flex ga-2 align-center">
@@ -123,6 +124,9 @@ const refreshFilter = () => {
     </v-row>
 
     <!-- Pagination -->
-    <PaginationLinks :paginator="products" />
+    <PaginationLinks
+        :paginator="products"
+        v-if="Object.keys(products.data).length > 0"
+    />
     <ProductsFormDialog v-model:isDialogVisible="isDialogVisible" />
 </template>
