@@ -11,13 +11,24 @@ class Product extends Model
 {
     return $this->belongsTo(Category::class);
 }
+
+ // Define the relationship with User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 protected $table="products";
-protected $fillable = ['
-    product_name',
+
+
+protected $fillable = [
+   'product_name',
    'image_path',
    'category_id',
    'description',
    'quantity',
+   'user_id',
    'price'
 
    ];

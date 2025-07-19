@@ -49,7 +49,7 @@ class AuthController extends Controller
 
             return redirect()->intended('products');
         }
-
+prod
         //return back if there's an error
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

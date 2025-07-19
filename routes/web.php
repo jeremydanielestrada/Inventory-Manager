@@ -15,6 +15,10 @@ Route::get('/', function(){
 //User validation
 Route::post('/login',  [AuthController::class, 'login'])->name('user.login');
 
+//test-route
+Route::post('/test-post', function () {
+    return response()->json(['message' => 'Success']);
+})->middleware('auth');
 
 
 
@@ -31,6 +35,7 @@ Route::post('/products',[ ProductController::class, 'store'])->name('products.st
 
 //Category
 Route::post('/category',[ CategoryController::class, 'store'])->name('category.store');
+Route::inertia('/category', 'Categories')->name('categories');
 
 
 });

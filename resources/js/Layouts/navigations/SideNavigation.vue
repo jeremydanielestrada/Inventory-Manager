@@ -18,7 +18,26 @@ const { mobile } = useDisplay();
         border
     >
         <v-list>
-            <v-list-item title="Navigation drawer"></v-list-item>
+            <Link :href="route('categories')" class="text-deco">
+                <v-list-item
+                    prepend-icon="mdi-folder-plus-outline"
+                    title="Create Category"
+                />
+            </Link>
+
+            <Link :href="route('products')" class="text-deco">
+                <v-list-item
+                    prepend-icon="mdi-folder-plus-outline"
+                    title="Products"
+                />
+            </Link>
         </v-list>
     </v-navigation-drawer>
 </template>
+
+<style scoped>
+.text-deco {
+    text-decoration: none;
+    color: #4db6ac;
+}
+</style>
