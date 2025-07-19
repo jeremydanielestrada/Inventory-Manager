@@ -1,11 +1,19 @@
 <script setup>
 import { watch, inject } from "vue";
 import { useDisplay } from "vuetify";
+import { router } from "@inertiajs/vue3";
 
 //Inject variables value
 const isDrawerVisible = inject("isDrawerVisible");
 //Utilize pre-defined functions
 const { mobile } = useDisplay();
+
+///defining routes
+//to category
+const toCategory = () => router.get(route("categories"));
+
+//to product
+const toProducts = () => router.get(route("products"));
 </script>
 
 <template>
@@ -18,19 +26,20 @@ const { mobile } = useDisplay();
         border
     >
         <v-list>
-            <Link :href="route('categories')" class="text-deco">
-                <v-list-item
-                    prepend-icon="mdi-folder-plus-outline"
-                    title="Create Category"
-                />
-            </Link>
+            <v-list-item
+                prepend-icon="mdi-folder-plus-outline"
+                title="Add new category"
+                link
+                @click="toCategory"
+            />
 
-            <Link :href="route('products')" class="text-deco">
-                <v-list-item
-                    prepend-icon="mdi-folder-plus-outline"
-                    title="Products"
-                />
-            </Link>
+            <v-list-item
+                prepend-icon="mdi-folder-plus-outline"
+                title="Products"
+                class="border-thin"
+                link
+                @click="toProducts"
+            />
         </v-list>
     </v-navigation-drawer>
 </template>
@@ -38,6 +47,5 @@ const { mobile } = useDisplay();
 <style scoped>
 .text-deco {
     text-decoration: none;
-    color: #4db6ac;
 }
 </style>

@@ -52,6 +52,9 @@ class ProductController extends Controller
          Product::create($validated);
 
 
+
+
+
     }
 
     /**

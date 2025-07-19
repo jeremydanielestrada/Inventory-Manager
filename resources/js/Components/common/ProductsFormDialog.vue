@@ -70,15 +70,14 @@ const onPreviewReset = () => {
 };
 
 const onSubmit = () => {
-    categoryForm.post(route("category.store"), {
+    formData.post(route("products.store"), {
+        forceFormData: true,
         onSuccess: () => {
-            formData.post(route("products.store"), {
-                forceFormData: true,
-                onSuccess: () => ("update:isDialogVisible", false),
-                onError: () => {
-                    console.log("Error Submitting Products");
-                },
-            });
+            emit("update:isDialogVisible", false);
+            formData.reset();
+        },
+        onError: () => {
+            console.log("Error Submitting Products");
         },
     });
 };
@@ -196,7 +195,9 @@ const onSubmit = () => {
                     </v-row>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn @click="emit('update:isDialogVisible', false)"
+                    <v-btn
+                        @click="emit('update:isDialogVisible', false)"
+                        :loading="formData.processing"
                         >Close dialog</v-btn
                     >
                 </v-card-actions>

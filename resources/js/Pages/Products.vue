@@ -12,8 +12,6 @@ const props = defineProps({
     categories: Array,
 });
 
-console.log(props.products.data);
-
 function filterByCategory(categoryId) {
     router.get(
         route("products"),
@@ -39,8 +37,6 @@ const returnHome = () => {
 
 const refreshFilter = () => {
     router.get(route("products", { search: null, category: null }));
-
-    console.log("Succesfully refresh filter");
 };
 </script>
 
@@ -127,5 +123,8 @@ const refreshFilter = () => {
         :paginator="products"
         v-if="Object.keys(products.data).length > 0"
     />
-    <ProductsFormDialog v-model:isDialogVisible="isDialogVisible" />
+    <ProductsFormDialog
+        v-model:isDialogVisible="isDialogVisible"
+        :categories="categories"
+    />
 </template>
