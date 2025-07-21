@@ -37,7 +37,6 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
 
-
         $validated = $request->validated() ;
         // $validated['image_path'] = $request->file('image_path')->storePublicly('product', 'public');
 
@@ -47,22 +46,20 @@ class ProductController extends Controller
 
         $validated['user_id'] = $request->user()->id;
 
-
-
          Product::create($validated);
-
-
-
-
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show( string $id )
+    public function show( Product $product )
     {
-        Product::findorFail($id);
+        return Inertia::render('Show',[
+            'product'=> $product->load('category'), ///eager load the category function from the product model as the relation of the props
+        ]);
+
+
     }
 
 

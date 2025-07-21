@@ -11,16 +11,18 @@ defineProps({
         <v-card-text>
             <!-- img -->
 
-            <v-img
-                :src="
-                    product.image_path
-                        ? `/storage/${product.image_path}`
-                        : '/storage/product/default_product.png'
-                "
-                height="200"
-                cover
-            >
-            </v-img>
+            <Link :href="route('products.show', product.id)">
+                <v-img
+                    :src="
+                        product.image_path
+                            ? `/storage/${product.image_path}`
+                            : '/storage/product/default_product.png'
+                    "
+                    height="200"
+                    cover
+                >
+                </v-img>
+            </Link>
 
             <h3 class="font-weight-bold">
                 {{ product.product_name }}
