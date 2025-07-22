@@ -11,27 +11,23 @@ defineProps({
 const theme = useTheme();
 
 const currentTheme = ref(theme.global.name.value);
+
+const { mobile } = useDisplay();
 </script>
 
 <template>
     <Head title="Product Detail" />
     <SideNavigation></SideNavigation>
 
-    <v-row>
-        <v-col cols="12">
-            <v-card
-                variant="outlined"
-                :color="
-                    currentTheme === 'light'
-                        ? 'teal-darken-2'
-                        : 'teal-lighten-2'
-                "
-                width="800"
+    <v-card :width="!mobile ? 800 : 350" class="mx-auto">
+        <v-card-title>
+            <v-chip>
+                {{ product.category?.category_name || "No Category" }}</v-chip
             >
-                <v-card-title>{{
-                    product.category?.category_name || "No Category"
-                }}</v-card-title>
-                <v-card-text>
+        </v-card-title>
+        <v-card-text>
+            <v-row>
+                <v-col cols="12" sm="6">
                     <v-img
                         :src="
                             product.image_path
@@ -42,32 +38,37 @@ const currentTheme = ref(theme.global.name.value);
                         cover
                     >
                     </v-img>
+                </v-col>
+                <v-col cols="12" sm="6">
+                    <div class="d-flex align-center ga-2 justify-space-around">
+                        <p class="text-subtitle-1 font-weight-bold">
+                            {{ product.product_name }}
+                        </p>
+                        <p class="text-body-1 f-weight">
+                            {{ getMoneyText(product.price) }}
+                        </p>
 
-                    <div class="d-flex align-center ga-5">
-                        <div class="d-flex flex-column ga-2 mt-3">
-                            <p class="text-body-1">
-                                {{ product.product_name }}
-                            </p>
-                            <p class="text-body-1">
-                                {{ getMoneyText(product.price) }}
-                            </p>
-
-                            <p class="text-disabled">
-                                {{ product.quantity }}
-                            </p>
-                        </div>
-
-                        <p class="font-weight-medium text-left">
-                            {{ product.description }}
+                        <p class="text-disabled">
+                            Quantity: {{ product.quantity }}
                         </p>
                     </div>
-                </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
-                    <v-btn>Delete</v-btn>
-                    <v-btn>Update</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-col>
-    </v-row>
+                    <v-divider></v-divider>
+                    <p class="font-weight-medium text-left mt-2">
+                        {{ product.description }}
+                    </p>
+                </v-col>
+            </v-row>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+            <v-btn>Delete</v-btn>
+            <v-btn>Update</v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
+
+<style>
+.f-weight {
+    font-weight: 600;
+}
+</style>
