@@ -19,6 +19,7 @@ const formData = useForm({
     price: null,
     category: null,
     category_id: null,
+    _method: null,
 });
 
 const selectCategory = ref([]);
@@ -47,6 +48,7 @@ watch(
             formData.quantity = newProduct.quantity || 0;
             formData.price = newProduct.price || 0;
             formData.category_id = newProduct.category_id || null;
+            formData._method = "Put";
 
             // Don't set image_path in the form data, just update the preview
             imgPreview.value = newProduct.image_path
@@ -81,24 +83,25 @@ const onPreviewReset = () => {
 const onSubmit = () => {
     if (isUpdate.value) {
         // For updates, use a FormData object directly
-        const updateData = new FormData();
-        updateData.append("_method", "PUT");
-        updateData.append("product_name", formData.product_name);
-        updateData.append("category_id", formData.category_id);
-        updateData.append("price", formData.price);
-        updateData.append("quantity", formData.quantity);
-        updateData.append("description", formData.description || "");
+        // const updateData = new FormData();
+        // updateData.append("_method", "PUT");
+        // updateData.append("product_name", formData.product_name);
+        // updateData.append("category_id", formData.category_id);
+        // updateData.append("price", formData.price);
+        // updateData.append("quantity", formData.quantity);
+        // updateData.append("description", formData.description || "");
+        // updateData.append("image_path", formData.image_path);
 
         // Only append image if it's a File object
-        if (formData.image_path instanceof File) {
-            updateData.append("image_path", formData.image_path);
-            console.log("Appending image file:", formData.image_path);
-        }
+        // if (formData.image_path instanceof File) {
+
+        //     console.log("Appending image file:", formData.image_path);
+        // }
 
         // Use Inertia's router directly with headers
-        router.post(
+        formData.post(
             route("products.update", props.productData.id),
-            updateData,
+            // updateData,
             {
                 forceFormData: true,
                 onSuccess: () => {
