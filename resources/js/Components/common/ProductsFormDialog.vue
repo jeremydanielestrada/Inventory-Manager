@@ -92,16 +92,19 @@ const onSubmit = () => {
         // Only append image if it's a File object
         if (formData.image_path instanceof File) {
             updateData.append("image_path", formData.image_path);
+            console.log("Appending image file:", formData.image_path);
         }
 
-        // Use Inertia's router directly
+        // Use Inertia's router directly with headers
         router.post(
             route("products.update", props.productData.id),
             updateData,
             {
+                forceFormData: true,
                 onSuccess: () => {
                     emit("update:isDialogVisible", false);
                     formData.reset();
+                    window.location.reload(); // Force reload to see changes
                 },
                 onError: (errors) => {
                     console.log("Error Updating Products", errors);

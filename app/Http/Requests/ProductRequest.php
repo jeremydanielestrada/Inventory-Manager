@@ -31,31 +31,28 @@ class ProductRequest extends FormRequest
             'description' => 'nullable|string|max:255',
         ];
     } else if(request()->routeIs('products.update')){
-        $rules = [
+        return [
             'product_name'=> 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'price'       => 'required|numeric',
             'quantity'    => 'required|integer',
             'description' => 'nullable|string|max:255',
+            'image_path' => 'nullable|image|mimes:jpeg,gif,png|max:5120'
         ];
 
-        // Only validate image if it's present in the request
-        if ($this->hasFile('image_path')) {
-            $rules['image_path'] = 'image|mimes:jpeg,gif,png|max:5120';
-        }
 
-        return $rules;
+
     }
 
     // Default rules
-    return [
-        'product_name'=> 'required|string|max:255',
-        'category_id' => 'required|exists:categories,id',
-        'price'       => 'required|numeric',
-        'quantity'    => 'required|integer',
-        'image_path'  => 'required|image|mimes:jpeg,gif,png|max:5120',
-        'description' => 'nullable|string|max:255',
-    ];
+    // return [
+    //     'product_name'=> 'required|string|max:255',
+    //     'category_id' => 'required|exists:categories,id',
+    //     'price'       => 'required|numeric',
+    //     'quantity'    => 'required|integer',
+    //     'image_path'  => 'required|image|mimes:jpeg,gif,png|max:5120',
+    //     'description' => 'nullable|string|max:255',
+    // ];
 }
 
 }
