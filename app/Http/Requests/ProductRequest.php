@@ -43,7 +43,7 @@ class ProductRequest extends FormRequest
 
 
     }
-
+    return [] ;
     // Default rules
     // return [
     //     'product_name'=> 'required|string|max:255',
