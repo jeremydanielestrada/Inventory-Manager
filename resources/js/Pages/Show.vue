@@ -5,8 +5,9 @@ import { useTheme } from "vuetify";
 import { useDisplay } from "vuetify";
 import { ref } from "vue";
 import ProductsFormDialog from "@/Components/common/ProductsFormDialog.vue";
+import { router } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     product: Object,
     categories: Array,
 });
@@ -18,6 +19,10 @@ const currentTheme = ref(theme.global.name.value);
 const { mobile } = useDisplay();
 
 const isDialogVisible = ref(false);
+
+const onDelete = () => {
+    router.delete(route("products.delete", props.product.id));
+};
 </script>
 
 <template>
@@ -66,7 +71,7 @@ const isDialogVisible = ref(false);
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-            <v-btn>Delete</v-btn>
+            <v-btn @click="onDelete">Delete</v-btn>
             <v-btn @click="isDialogVisible = !isDialogVisible">Update</v-btn>
         </v-card-actions>
     </v-card>

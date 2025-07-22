@@ -1,6 +1,9 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
+import { useDisplay } from "vuetify";
+
+const { mobile } = useDisplay();
 
 const form = useForm({
     category_name: null,
@@ -22,7 +25,7 @@ const submit = () => {
     <Head title="Category"></Head>
     <SideNavigation />
     <v-form @submit.prevent="submit">
-        <v-card width="500">
+        <v-card :width="mobile ? '300' : '500'" class="mx-auto">
             <v-card-text>
                 <v-row>
                     <v-col cols="12">

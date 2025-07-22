@@ -105,6 +105,15 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        Product::findOrFail($id);
+          $product =  Product::findOrFail($id);
+
+          if($product->image_path) {
+            Storage::disk('public')->delete($product->image_path);
+          }
+
+          $product->delete();
+
+
+          return redirect()->route('products')->with('success','Product has been deleted successfully');
     }
 }
