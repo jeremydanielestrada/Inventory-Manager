@@ -4,8 +4,11 @@ import { getMoneyText } from "@/utils/helpers";
 import { useTheme } from "vuetify";
 import { useDisplay } from "vuetify";
 import { ref } from "vue";
+import ProductsFormDialog from "@/Components/common/ProductsFormDialog.vue";
+
 defineProps({
     product: Object,
+    categories: Array,
 });
 
 const theme = useTheme();
@@ -13,6 +16,8 @@ const theme = useTheme();
 const currentTheme = ref(theme.global.name.value);
 
 const { mobile } = useDisplay();
+
+const isDialogVisible = ref(false);
 </script>
 
 <template>
@@ -62,9 +67,14 @@ const { mobile } = useDisplay();
         <v-divider></v-divider>
         <v-card-actions>
             <v-btn>Delete</v-btn>
-            <v-btn>Update</v-btn>
+            <v-btn @click="isDialogVisible = !isDialogVisible">Update</v-btn>
         </v-card-actions>
     </v-card>
+    <ProductsFormDialog
+        v-model:isDialogVisible="isDialogVisible"
+        :productData="product"
+        :categories="categories"
+    ></ProductsFormDialog>
 </template>
 
 <style>

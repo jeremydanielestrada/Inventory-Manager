@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -57,6 +58,7 @@ class ProductController extends Controller
     {
         return Inertia::render('Show',[
             'product'=> $product->load('category'), ///eager load the category function from the product model as the relation of the props
+            'categories' => Category::all(),
         ]);
 
 
@@ -67,25 +69,36 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request,string $id)
-    {
-         $validated = $request->validated();
-         $item = Product::findOrFail($id);
+  public function update(ProductRequest $request, string $id)
+{
+    Log::info('Update method called with ID: ' . $id);
+    Log::info('Request data: ', $request->all());
 
-           // If new image is uploaded
+    $validated = $request->validated();
+    Log::info('Validated data: ', $validated);
+
+    $product = Product::findOrFail($id);
+    Log::info('Found product: ', $product->toArray());
+
+    // If new image is uploaded
     if ($request->hasFile('image_path')) {
         // Delete old image
-        if (!is_null($item->image_path)) {
-            Storage::disk('public')->delete($item->image_path);
+        if (!is_null($product->image_path)) {
+            Storage::disk('public')->delete($product->image_path);
         }
 
         // Store new image and update in validated data
         $validated['image_path'] = $request->file('image_path')->store('product', 'public');
     }
 
-      // Update item with all validated data (including new image_path if applicable)
-        Product::update($validated);
-    }
+    // Update item with all validated data
+    $result = $product->update($validated);
+    Log::info('Update result: ' . ($result ? 'true' : 'false'));
+
+    return redirect()->back()->with('success', 'Product updated successfully');
+}
+
+
 
     /**
      * Remove the specified resource from storage.

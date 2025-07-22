@@ -19,15 +19,43 @@ class ProductRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+   public function rules(): array
+{
+    if(request()->routeIs('products.store')){
         return [
-            'product_name' => 'string|max:255',
+            'product_name'=> 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'image_path'   => 'required|image|mimes:jpg,gif,png|max:5120',
-            'price'        => 'required|decimal:0,2',
-            'description'  => 'string|nullable|max:255',
-            'quantity'     => 'required|integer',
+            'price'       => 'required|numeric',
+            'quantity'    => 'required|integer',
+            'image_path'  => 'required|image|mimes:jpeg,gif,png|max:5120',
+            'description' => 'nullable|string|max:255',
         ];
+    } else if(request()->routeIs('products.update')){
+        $rules = [
+            'product_name'=> 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price'       => 'required|numeric',
+            'quantity'    => 'required|integer',
+            'description' => 'nullable|string|max:255',
+        ];
+
+        // Only validate image if it's present in the request
+        if ($this->hasFile('image_path')) {
+            $rules['image_path'] = 'image|mimes:jpeg,gif,png|max:5120';
+        }
+
+        return $rules;
     }
+
+    // Default rules
+    return [
+        'product_name'=> 'required|string|max:255',
+        'category_id' => 'required|exists:categories,id',
+        'price'       => 'required|numeric',
+        'quantity'    => 'required|integer',
+        'image_path'  => 'required|image|mimes:jpeg,gif,png|max:5120',
+        'description' => 'nullable|string|max:255',
+    ];
+}
+
 }

@@ -32,6 +32,8 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 Route::get('/products',[ ProductController::class, 'index'])->name('products');
 Route::post('/products',[ ProductController::class, 'store'])->name('products.store');
 Route::get('/products/{product}',[ ProductController::class, 'show'])->name('products.show');
+Route::put('/products/{id}',[ ProductController::class, 'update'])->name('products.update');
+
 
 
 //Category
