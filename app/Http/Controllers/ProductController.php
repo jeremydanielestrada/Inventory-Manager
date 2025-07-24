@@ -75,7 +75,7 @@ class ProductController extends Controller
      */
   public function update(ProductRequest $request, string $id)
 {
-    Gate::authorize('modify', Product::class);
+     Gate::authorize('modify', Product::findOrFail( $id ));
 
     $validated = $request->validated();
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        Gate::authorize('modify', Product::class);
+        Gate::authorize('modify', Product::findOrFail( $id ));
 
           $product =  Product::findOrFail($id);
 
