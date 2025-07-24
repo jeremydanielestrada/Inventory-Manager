@@ -1,13 +1,12 @@
 <script setup>
 import { watch, inject, computed } from "vue";
 import { useDisplay } from "vuetify";
-import { router, usePage } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 //Inject variables value
 const isDrawerVisible = inject("isDrawerVisible");
 //Utilize pre-defined functions
 const { mobile } = useDisplay();
-const page = usePage();
 
 // Computed properties to check active routes
 const isCategoryActive = computed(() => route().current("categories"));

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -56,9 +58,11 @@ class ProductController extends Controller
      */
     public function show( Product $product )
     {
+
         return Inertia::render('Show',[
             'product'=> $product->load('category'), ///eager load the category function from the product model as the relation of the props
             'categories' => Category::all(),
+            'canModify'=>  Auth::user() ? Auth::user()->can('modify', $product) : false,
         ]);
 
 
@@ -71,14 +75,11 @@ class ProductController extends Controller
      */
   public function update(ProductRequest $request, string $id)
 {
-    Log::info('Update method called with ID: ' . $id);
-    Log::info('Request data: ', $request->all());
+    Gate::authorize('modify', Product::class);
 
     $validated = $request->validated();
-    Log::info('Validated data: ', $validated);
 
     $product = Product::findOrFail($id);
-    Log::info('Found product: ', $product->toArray());
 
     // If new image is uploaded
     if ($request->hasFile('image_path')) {
@@ -93,7 +94,6 @@ class ProductController extends Controller
 
     // Update item with all validated data
     $result = $product->update($validated);
-    Log::info('Update result: ' . ($result ? 'true' : 'false'));
 
     return redirect()->back()->with('success', 'Product updated successfully');
 }
@@ -105,6 +105,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('modify', Product::class);
+
           $product =  Product::findOrFail($id);
 
           if($product->image_path) {

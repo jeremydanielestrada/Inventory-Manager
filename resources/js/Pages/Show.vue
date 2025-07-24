@@ -11,6 +11,7 @@ import ConfirmDialog from "@/Components/common/ConfirmDialog.vue";
 const props = defineProps({
     product: Object,
     categories: Array,
+    canModify: Boolean,
 });
 
 const theme = useTheme();
@@ -74,10 +75,17 @@ const onDelete = () => {
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-            <v-btn @click="isConfirmDialogVisible = !isConfirmDialogVisible"
-                >Delete</v-btn
-            >
-            <v-btn @click="isDialogVisible = !isDialogVisible">Update</v-btn>
+            <div v-if="props.canModify">
+                <v-btn @click="isConfirmDialogVisible = !isConfirmDialogVisible"
+                    >Delete</v-btn
+                >
+                <v-btn @click="isDialogVisible = !isDialogVisible"
+                    >Update</v-btn
+                >
+            </div>
+            <div v-else>
+                <p class="text-disabled text-right">View Only</p>
+            </div>
         </v-card-actions>
     </v-card>
     <ProductsFormDialog
