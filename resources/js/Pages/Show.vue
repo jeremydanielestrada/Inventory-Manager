@@ -6,6 +6,7 @@ import { useDisplay } from "vuetify";
 import { ref } from "vue";
 import ProductsFormDialog from "@/Components/common/ProductsFormDialog.vue";
 import { router } from "@inertiajs/vue3";
+import ConfirmDialog from "@/Components/common/ConfirmDialog.vue";
 
 const props = defineProps({
     product: Object,
@@ -19,6 +20,8 @@ const currentTheme = ref(theme.global.name.value);
 const { mobile } = useDisplay();
 
 const isDialogVisible = ref(false);
+
+const isConfirmDialogVisible = ref(false);
 
 const onDelete = () => {
     router.delete(route("products.delete", props.product.id));
@@ -71,7 +74,9 @@ const onDelete = () => {
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-            <v-btn @click="onDelete">Delete</v-btn>
+            <v-btn @click="isConfirmDialogVisible = !isConfirmDialogVisible"
+                >Delete</v-btn
+            >
             <v-btn @click="isDialogVisible = !isDialogVisible">Update</v-btn>
         </v-card-actions>
     </v-card>
@@ -80,6 +85,12 @@ const onDelete = () => {
         :productData="product"
         :categories="categories"
     ></ProductsFormDialog>
+    <ConfirmDialog
+        v-model:isDialogVisible="isConfirmDialogVisible"
+        title="Delete Product"
+        text="Please Confirm to delte this item"
+        @confirm="onDelete"
+    ></ConfirmDialog>
 </template>
 
 <style>
