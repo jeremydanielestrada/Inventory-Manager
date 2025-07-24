@@ -5,6 +5,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\IsAdmin;
+use App\Models\User;
 
 //Public Routes
 
@@ -38,9 +40,8 @@ Route::delete('/products/{id}',[ ProductController::class, 'destroy'])->name('pr
 
 
 //Category
-Route::post('/category',[ CategoryController::class, 'store'])->name('category.store');
-Route::inertia('/category', 'Categories')->name('categories');
-
+Route::post('/category',[ CategoryController::class, 'store'])->middleware(IsAdmin::class)->name('category.store');
+Route::inertia('/category', 'Categories')->middleware(IsAdmin::class)->name('categories');
 
 });
 

@@ -37,6 +37,7 @@ const toProducts = () => router.get(route("products"));
                 @click="toCategory"
                 :active="isCategoryActive"
                 :color="isCategoryActive ? 'teal-darken-2' : ''"
+                v-if="$page.props.auth.user.role === 'admin'"
             />
 
             <v-list-item

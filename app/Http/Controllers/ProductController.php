@@ -60,9 +60,9 @@ class ProductController extends Controller
     {
 
         return Inertia::render('Show',[
-            'product'=> $product->load('category'), ///eager load the category function from the product model as the relation of the props
+            'product'    => $product->load('category'), ///eager load the category function from the product model as the relation of the props
             'categories' => Category::all(),
-            'canModify'=>  Auth::user() ? Auth::user()->can('modify', $product) : false,
+            'canModify'  =>  Auth::user() ? Auth::user()->can('modify', $product) : false,
         ]);
 
 
