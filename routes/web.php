@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdmin;
-use App\Models\User;
+use App\Http\Controllers\UserDashboardController;
 
 //Public Routes
 
@@ -42,6 +42,11 @@ Route::delete('/products/{id}',[ ProductController::class, 'destroy'])->name('pr
 //Category
 Route::post('/category',[ CategoryController::class, 'store'])->middleware(IsAdmin::class)->name('category.store');
 Route::inertia('/category', 'Categories')->middleware(IsAdmin::class)->name('categories');
+
+
+
+//UserDashboard
+Route::get('/dashboard',[ UserDashboardController::class,'index'])->name('dashboard');
 
 });
 

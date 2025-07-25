@@ -116,6 +116,6 @@ class ProductController extends Controller
           $product->delete();
 
 
-          return redirect()->route('products')->with('success','Product has been deleted successfully');
+          return with('success','Product has been deleted successfully');
     }
 }

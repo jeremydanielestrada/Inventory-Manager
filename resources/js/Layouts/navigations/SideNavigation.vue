@@ -11,6 +11,7 @@ const { mobile } = useDisplay();
 // Computed properties to check active routes
 const isCategoryActive = computed(() => route().current("categories"));
 const isProductsActive = computed(() => route().current("products"));
+const isDashboardActive = computed(() => route().current("dashboard"));
 
 ///defining routes
 //to category
@@ -18,6 +19,9 @@ const toCategory = () => router.get(route("categories"));
 
 //to product
 const toProducts = () => router.get(route("products"));
+
+//to dashboard
+const toDashboard = () => router.get(route("dashboard"));
 </script>
 
 <template>
@@ -49,6 +53,15 @@ const toProducts = () => router.get(route("products"));
                 :color="isProductsActive ? 'teal-darken-2' : ''"
             />
         </v-list>
+
+        <v-list-item
+            prepend-icon="mdi-folder-plus-outline"
+            title="Dashboard"
+            link
+            @click="toDashboard"
+            :active="isDashboardActive"
+            :color="isDashboardActive ? 'teal-darken-2' : ''"
+        />
     </v-navigation-drawer>
 </template>
 
