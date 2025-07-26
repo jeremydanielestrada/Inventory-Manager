@@ -2,6 +2,7 @@
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
 import ConfirmDialog from "@/Components/common/ConfirmDialog.vue";
 import PaginationLinks from "@/Components/PaginationLinks.vue";
+import AlertNotifications from "@/Components/common/AlertNotifications.vue";
 import { router } from "@inertiajs/vue3";
 import { ref } from "vue";
 
@@ -16,6 +17,7 @@ const isDialogVisible = ref(false);
 <template>
     <Head title="Dasboard" />
     <SideNavigation />
+    <AlertNotifications :status="status" />
 
     <v-row>
         <v-col cols="12">
@@ -24,9 +26,9 @@ const isDialogVisible = ref(false);
 
         <v-col cols="12">
             <div v-if="products.data.length">
-                <v-table>
+                <v-table hover>
                     <thead>
-                        <tr>
+                        <tr class="bg-teal-lighten-4">
                             <th class="text-left">Product name</th>
                             <th class="text-left">Date Added</th>
                             <th>View</th>
@@ -79,7 +81,9 @@ const isDialogVisible = ref(false);
                 </v-table>
             </div>
 
-            <div class="text-center" v-else>You dont have any products</div>
+            <div class="text-center" v-else>
+                You dont have any products, go to products to add
+            </div>
         </v-col>
     </v-row>
 

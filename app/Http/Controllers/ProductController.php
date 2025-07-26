@@ -93,7 +93,7 @@ class ProductController extends Controller
     }
 
     // Update item with all validated data
-    $result = $product->update($validated);
+    Product::update($validated);
 
     return redirect()->back()->with('success', 'Product updated successfully');
 }
@@ -116,6 +116,6 @@ class ProductController extends Controller
           $product->delete();
 
 
-          return with('success','Product has been deleted successfully');
+          return redirect()->route('dashboard')->with('status','Product has been deleted successfully');
     }
 }

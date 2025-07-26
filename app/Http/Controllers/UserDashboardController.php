@@ -14,7 +14,7 @@ class UserDashboardController extends Controller
 
         return inertia::render('UserDashboard',[
         'products' => $products,
-        'status' => session('status')
+        'status'   => session('status')
     ]);
 
     }
