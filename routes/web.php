@@ -29,24 +29,33 @@ Route::middleware(['auth'])->group(function(){
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 
-
 ///Products
-Route::get('/products',[ ProductController::class, 'index'])->name('products');
-Route::post('/products',[ ProductController::class, 'store'])->name('products.store');
-Route::get('/products/{product}',[ ProductController::class, 'show'])->name('products.show');
-Route::put('/products/{id}',[ ProductController::class, 'update'])->name('products.update');
-Route::delete('/products/{id}',[ ProductController::class, 'destroy'])->name('products.delete');
+    Route::controller(ProductController::class)->group(function (){
+
+        Route::get('/products', 'index')->name('products');
+        Route::post('/products', 'store')->name('products.store');
+        Route::get('/products/{product}', 'show')->name('products.show');
+        Route::put('/products/{id}', 'update')->name('products.update');
+        Route::delete('/products/{id}', 'destroy')->name('products.delete');
+
+    });
 
 
 
-//Category
-Route::post('/category',[ CategoryController::class, 'store'])->middleware(IsAdmin::class)->name('category.store');
-Route::inertia('/category', 'Categories')->middleware(IsAdmin::class)->name('categories');
 
 
 
 //UserDashboard
 Route::get('/dashboard',[ UserDashboardController::class,'index'])->name('dashboard');
+
+});
+
+//Admin Routes
+Route::middleware(['auth', isAdmin::class])->group(function(){
+
+//Category
+Route::post('/category',[CategoryController::class, 'store'])->name('category.store');
+Route::inertia('/category', 'Categories')->name('categories');
 
 });
 
