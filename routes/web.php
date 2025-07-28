@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\AdminController;
 
 //Public Routes
 
@@ -57,6 +58,9 @@ Route::middleware(['auth', isAdmin::class])->group(function(){
 Route::post('/category',[CategoryController::class, 'store'])->name('category.store');
 Route::inertia('/category', 'Categories')->name('categories');
 
+
+//AdminDashboard
+Route::get('/admin',[AdminController::class, 'index'])->name('admin');
 });
 
 

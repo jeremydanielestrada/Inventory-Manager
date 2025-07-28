@@ -30,16 +30,25 @@ defineProps({
             <p class="font-weight-medium">
                 {{ product.description.substring("0", 40) }}...
             </p>
-            <p>{{ product.quantity }}</p>
-            <p class="font-weight-bold">{{ getMoneyText(product.price) }}</p>
+
+            <v-divider></v-divider>
+            <div class="d-flex align-center justify-space-between pt-2">
+                <h5 variant="plain" disabled class="font-weight-black">
+                    {{ product.category?.category_name || "No Category" }}
+                </h5>
+                <p class="font-weight-light">
+                    Added on
+                    {{
+                        new Date(product.created_at)
+                            .toLocaleDateString("en-US", {
+                                month: "long",
+                                day: "2-digit",
+                                year: "numeric",
+                            })
+                            .replace(/g,/g, "/")
+                    }}
+                </p>
+            </div>
         </v-card-text>
-        <v-card-actions class="d-flex align-center justify-space-between">
-            <v-btn variant="plain" disabled class="font-weight-black">{{
-                product.category?.category_name || "No Category"
-            }}</v-btn>
-            <p class="font-weight-light">
-                Added on {{ new Date(product.created_at).toLocaleDateString() }}
-            </p>
-        </v-card-actions>
     </v-card>
 </template>

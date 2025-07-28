@@ -12,6 +12,7 @@ const { mobile } = useDisplay();
 const isCategoryActive = computed(() => route().current("categories"));
 const isProductsActive = computed(() => route().current("products"));
 const isDashboardActive = computed(() => route().current("dashboard"));
+const isAdminDashboardActive = computed(() => route().current("admin"));
 
 ///defining routes
 //to category
@@ -22,6 +23,9 @@ const toProducts = () => router.get(route("products"));
 
 //to dashboard
 const toDashboard = () => router.get(route("dashboard"));
+
+//to admin dashboard
+const toAdminDashboard = () => router.get(route("admin"));
 </script>
 
 <template>
@@ -36,6 +40,33 @@ const toDashboard = () => router.get(route("dashboard"));
         <v-list>
             <v-list-item
                 prepend-icon="mdi-folder-plus-outline"
+                title="Products"
+                link
+                @click="toProducts"
+                :active="isProductsActive"
+                :color="isProductsActive ? 'teal-darken-2' : ''"
+            />
+
+            <v-list-item
+                prepend-icon="mdi-folder-plus-outline"
+                title="Dashboard"
+                link
+                @click="toDashboard"
+                :active="isDashboardActive"
+                :color="isDashboardActive ? 'teal-darken-2' : ''"
+            />
+
+            <v-list-item
+                prepend-icon="mdi-folder-plus-outline"
+                title="Admin Dashboard"
+                link
+                @click="toAdminDashboard"
+                :active="isAdminDashboardActive"
+                :color="isAdminDashboardActive ? 'teal-darken-2' : ''"
+            />
+
+            <v-list-item
+                prepend-icon="mdi-folder-plus-outline"
                 title="Add new category"
                 link
                 @click="toCategory"
@@ -43,25 +74,7 @@ const toDashboard = () => router.get(route("dashboard"));
                 :color="isCategoryActive ? 'teal-darken-2' : ''"
                 v-if="$page.props.auth.user.role === 'admin'"
             />
-
-            <v-list-item
-                prepend-icon="mdi-folder-plus-outline"
-                title="Products"
-                link
-                @click="toProducts"
-                :active="isProductsActive"
-                :color="isProductsActive ? 'teal-darken-2' : ''"
-            />
         </v-list>
-
-        <v-list-item
-            prepend-icon="mdi-folder-plus-outline"
-            title="Dashboard"
-            link
-            @click="toDashboard"
-            :active="isDashboardActive"
-            :color="isDashboardActive ? 'teal-darken-2' : ''"
-        />
     </v-navigation-drawer>
 </template>
 

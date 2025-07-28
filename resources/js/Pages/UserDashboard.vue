@@ -37,7 +37,20 @@ const isDialogVisible = ref(false);
                     </thead>
                     <tbody>
                         <tr v-for="product in products.data" :key="product.id">
-                            <td>{{ product.product_name }}</td>
+                            <td>
+                                {{ product.product_name }}
+                                <v-avatar>
+                                    <v-img
+                                        :src="
+                                            product.image_path
+                                                ? `/storage/${product.image_path}`
+                                                : '/storage/product/default_product.png'
+                                        "
+                                        cover
+                                    >
+                                    </v-img>
+                                </v-avatar>
+                            </td>
                             <td>
                                 {{
                                     new Date(product.created_at)
@@ -93,3 +106,9 @@ const isDialogVisible = ref(false);
         v-if="Object.keys(products.data).length > 0"
     />
 </template>
+
+<style scoped>
+.img-style {
+    border-radius: 100px;
+}
+</style>

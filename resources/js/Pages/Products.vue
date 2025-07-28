@@ -63,7 +63,7 @@ const refreshFilter = () => {
             </v-btn>
 
             <v-btn
-                icon
+                iconc
                 size="30"
                 class="mb-5"
                 @click="isDialogVisible = !isDialogVisible"
