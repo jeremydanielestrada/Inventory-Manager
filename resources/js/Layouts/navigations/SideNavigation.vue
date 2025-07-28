@@ -63,6 +63,7 @@ const toAdminDashboard = () => router.get(route("admin"));
                 @click="toAdminDashboard"
                 :active="isAdminDashboardActive"
                 :color="isAdminDashboardActive ? 'teal-darken-2' : ''"
+                v-if="$page.props.auth.user.role === 'admin'"
             />
 
             <v-list-item
