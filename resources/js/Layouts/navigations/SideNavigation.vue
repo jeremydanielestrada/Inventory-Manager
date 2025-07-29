@@ -12,7 +12,7 @@ const { mobile } = useDisplay();
 const isCategoryActive = computed(() => route().current("categories"));
 const isProductsActive = computed(() => route().current("products"));
 const isDashboardActive = computed(() => route().current("dashboard"));
-const isAdminDashboardActive = computed(() => route().current("admin"));
+const isAdminDashboardActive = computed(() => route().current("admin.index"));
 
 ///defining routes
 //to category
@@ -25,7 +25,7 @@ const toProducts = () => router.get(route("products"));
 const toDashboard = () => router.get(route("dashboard"));
 
 //to admin dashboard
-const toAdminDashboard = () => router.get(route("admin"));
+const toAdminDashboard = () => router.get(route("admin.index"));
 </script>
 
 <template>

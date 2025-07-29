@@ -58,4 +58,14 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+
+    // public function scopeFilter($query,  $filter){
+    //     if($filter['search'] ?? false){
+    //         $query ->
+    //             where('firstName','like','%' .request('search').'%')
+    //             ->orWhere('lastName', 'like', '%' . request('search') . '%')
+    //             ->orWhere('email','like','%'.request('search').'%');
+    //     }
+    // }
+
 }

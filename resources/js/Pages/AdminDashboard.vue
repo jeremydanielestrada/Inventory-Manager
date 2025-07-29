@@ -1,10 +1,29 @@
 <script setup>
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
 import PaginationLinks from "@/Components/PaginationLinks.vue";
+import { useForm, router } from "@inertiajs/vue3";
 
 defineProps({
     users: Object,
 });
+
+const params = route().params;
+
+const form = useForm({
+    search: params.search,
+});
+
+const search = () => {
+    router.get(route("admin.index"), {
+        search: form.search,
+    });
+};
+
+const refreshFilter = () => {
+    router.get(route("admin.index"), {
+        search: null,
+    });
+};
 </script>
 
 <template>
@@ -12,11 +31,27 @@ defineProps({
     <SideNavigation></SideNavigation>
 
     <v-row>
-        <v-col cols="12">
+        <v-col cols="8" sm="6" md="4" lg="3">
             <h3>Users</h3>
+            <v-form @submit.prevent="search">
+                <v-text-field
+                    type="search"
+                    v-model="form.search"
+                    label="Search User"
+                    variant="outlined"
+                    density="compact"
+                    append-inner-icon="mdi-magnify"
+                    clearable
+                ></v-text-field>
+            </v-form>
+        </v-col>
+        <v-col cols="4" sm="6" md="8" lg="9" class="d-flex align-center">
+            <v-btn icon size="30" @click="refreshFilter">
+                <v-icon>mdi-refresh</v-icon>
+            </v-btn>
         </v-col>
 
-        <v-col cols="12">
+        <v-col cols="12" sm="6" lg="12" md="12">
             <div v-if="users.data.length">
                 <v-table hover>
                     <thead>
@@ -29,7 +64,15 @@ defineProps({
                     </thead>
                     <tbody>
                         <tr v-for="user in users.data" :key="user.id">
-                            <td>{{ user.firstName + " " + user.lastName }}</td>
+                            <td class="d-flex flex-column" ga-2>
+                                <p class="mt-2">
+                                    {{ user.firstName + " " + user.lastName }}
+                                </p>
+
+                                <small class="text-disabled">{{
+                                    user.email
+                                }}</small>
+                            </td>
                             <td>
                                 {{ user.role }}
                             </td>
