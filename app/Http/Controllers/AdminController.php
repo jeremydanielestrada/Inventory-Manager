@@ -31,7 +31,15 @@ class AdminController extends Controller
 
     public function show(User $user){
                                 //get the product function from the user model
-        $user_products = $user->products()->latest()->paginate(10);
+        $user_products = $user->products()->latest()
+         ->where(function ($query) {
+            if (request('search')) {
+                $query->where('product_name', 'like', '%' . request('search') . '%');
+            }
+        })
+
+        ->paginate(10)
+        ->withQueryString();
 
 
         return Inertia::render('UserPage',[

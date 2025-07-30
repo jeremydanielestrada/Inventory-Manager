@@ -1,11 +1,36 @@
 <script setup>
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
 import PaginationLinks from "@/Components/PaginationLinks.vue";
+import { useForm, router } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     user: Object,
     products: Object,
 });
+
+const params = route().params;
+
+const form = useForm({
+    search: params.search,
+});
+
+const search = () => {
+    router.get(
+        route("user.show", {
+            user: props.user.id,
+            search: form.search,
+        })
+    );
+};
+
+const refreshFilter = () => {
+    router.get(
+        route("user.show", {
+            search: null,
+            user: props.user.id,
+        })
+    );
+};
 </script>
 
 <template>
@@ -13,8 +38,25 @@ defineProps({
     <SideNavigation />
 
     <v-row>
-        <v-col cols="4" sm="6" lg="3">
-            <h3>{{ user.firstName }}'s product list</h3>
+        <v-col cols="8" sm="6" md="4" lg="3">
+            <h3 class="mb-3">{{ user.firstName }}'s product list</h3>
+
+            <v-form @submit.prevent="search">
+                <v-text-field
+                    type="search"
+                    v-model="form.search"
+                    label="Search User"
+                    variant="outlined"
+                    density="compact"
+                    append-inner-icon="mdi-magnify"
+                    clearable
+                ></v-text-field>
+            </v-form>
+        </v-col>
+        <v-col cols="4" sm="6" md="8" lg="9" class="d-flex align-center">
+            <v-btn icon size="30" @click="refreshFilter">
+                <v-icon>mdi-refresh</v-icon>
+            </v-btn>
         </v-col>
 
         <v-col cols="12" sm="6" lg="12" md="12">
@@ -23,7 +65,9 @@ defineProps({
                     <thead>
                         <tr class="bg-teal-lighten-4">
                             <th class="text-left">Product Name</th>
+                            <th class="text-left">Image</th>
                             <th class="text-left">Date Added by user</th>
+                            <th class="text-left">Quantity</th>
                             <th class="text-left">View</th>
                         </tr>
                     </thead>
@@ -31,6 +75,8 @@ defineProps({
                         <tr v-for="product in products.data" :key="product.id">
                             <td>
                                 {{ product.product_name }}
+                            </td>
+                            <td>
                                 <v-avatar>
                                     <v-img
                                         :src="
@@ -54,6 +100,7 @@ defineProps({
                                         .replace(/g,/g, "/")
                                 }}
                             </td>
+                            <td>{{ product.quantity }}</td>
                             <td>
                                 <Link
                                     :href="route('products.show', product.id)"

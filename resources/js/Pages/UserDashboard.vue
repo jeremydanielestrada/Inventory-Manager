@@ -30,6 +30,7 @@ const isDialogVisible = ref(false);
                     <thead>
                         <tr class="bg-teal-lighten-4">
                             <th class="text-left">Product name</th>
+                            <th class="text-left">Image</th>
                             <th class="text-left">Date Added</th>
                             <th>View</th>
                             <th>Delete</th>
@@ -39,6 +40,8 @@ const isDialogVisible = ref(false);
                         <tr v-for="product in products.data" :key="product.id">
                             <td>
                                 {{ product.product_name }}
+                            </td>
+                            <td>
                                 <v-avatar>
                                     <v-img
                                         :src="
