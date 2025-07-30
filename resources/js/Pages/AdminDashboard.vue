@@ -84,8 +84,7 @@ const refreshFilter = () => {
                                     :href="route('user.show', user.id)"
                                     class="text-decoration-none text-teal-lighten-3"
                                 >
-                                    View User
-                                    <v-icon>mdi-link</v-icon>
+                                    <v-icon>mdi-eye-arrow-right</v-icon>
                                 </Link>
                             </td>
                         </tr>

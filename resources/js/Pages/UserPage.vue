@@ -59,8 +59,7 @@ defineProps({
                                     :href="route('products.show', product.id)"
                                     class="text-decoration-none text-teal-lighten-3"
                                 >
-                                    View
-                                    <v-icon>mdi-link</v-icon>
+                                    <v-icon>mdi-eye-arrow-right</v-icon>
                                 </Link>
                             </td>
                         </tr>
