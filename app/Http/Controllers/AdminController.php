@@ -26,4 +26,17 @@ class AdminController extends Controller
         ]);
 
     }
+
+
+
+    public function show(User $user){
+                                //get the product function from the user model
+        $user_products = $user->products()->latest()->paginate(10);
+
+
+        return Inertia::render('UserPage',[
+            'user' => $user,
+            'products' => $user_products
+        ]);
+    }
 }

@@ -75,7 +75,9 @@ const onDelete = () => {
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-            <div v-if="props.canModify">
+            <div
+                v-if="props.canModify && $page.props.auth.user.role === 'admin'"
+            >
                 <v-btn @click="isConfirmDialogVisible = !isConfirmDialogVisible"
                     >Delete</v-btn
                 >

@@ -79,7 +79,15 @@ const refreshFilter = () => {
                             <td>
                                 {{ user.products.length }}
                             </td>
-                            <td>View User</td>
+                            <td>
+                                <Link
+                                    :href="route('user.show', user.id)"
+                                    class="text-decoration-none text-teal-lighten-3"
+                                >
+                                    View User
+                                    <v-icon>mdi-link</v-icon>
+                                </Link>
+                            </td>
                         </tr>
                     </tbody>
                 </v-table>

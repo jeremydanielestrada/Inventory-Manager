@@ -61,6 +61,7 @@ Route::inertia('/category', 'Categories')->name('categories');
 
 //AdminDashboard
 Route::get('/admin',[AdminController::class, 'index'])->name('admin.index');
+Route::get('/users/{user}',[AdminController::class, 'show'])->name('user.show');
 });
 
 
