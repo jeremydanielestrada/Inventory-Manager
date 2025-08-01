@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Category;
 
 class UserDashboardController extends Controller
 {
@@ -11,9 +12,11 @@ class UserDashboardController extends Controller
 
 
         $products = $request->user()->products()->latest()->paginate(10);
+        $categories = Category::with("products")->get();
 
         return inertia::render('UserDashboard',[
         'products' => $products,
+        'categories' => $categories,
         'status'   => session('status')
     ]);
 
