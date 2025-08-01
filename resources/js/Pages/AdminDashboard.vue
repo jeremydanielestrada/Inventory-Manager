@@ -59,6 +59,7 @@ const refreshFilter = () => {
                             <th class="text-left">Name</th>
                             <th class="text-left">Role</th>
                             <th class="text-left">Products</th>
+                            <th class="text-left">Product Status</th>
                             <th class="text-left">View</th>
                         </tr>
                     </thead>
@@ -80,9 +81,26 @@ const refreshFilter = () => {
                                 {{ user.products.length }}
                             </td>
                             <td>
+                                <p v-if="user.products.length === 0">
+                                    No Stock
+                                    <v-icon color="error">mdi-circle</v-icon>
+                                </p>
+
+                                <p v-else-if="user.products.length <= 5">
+                                    Low Stock
+                                    <v-icon color="warning">mdi-circle</v-icon>
+                                </p>
+
+                                <p v-else>
+                                    On Stock
+                                    <v-icon color="green">mdi-circle</v-icon>
+                                </p>
+                            </td>
+                            <td>
                                 <Link
                                     :href="route('user.show', user.id)"
                                     class="text-decoration-none text-teal-lighten-3"
+                                    v-if="user.products.length"
                                 >
                                     <v-icon>mdi-eye-arrow-right</v-icon>
                                 </Link>
