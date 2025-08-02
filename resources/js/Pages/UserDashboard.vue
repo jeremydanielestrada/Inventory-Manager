@@ -13,8 +13,6 @@ const props = defineProps({
 });
 
 const isDialogVisible = ref(false);
-
-console.log(props.categories);
 </script>
 
 <template>
@@ -23,19 +21,25 @@ console.log(props.categories);
     <AlertNotifications :status="status" />
 
     <v-row>
-        <v-col cols="4" lg="3">
+        <v-col cols="12" sm="4" lg="12">
             <h3>Your Products</h3>
         </v-col>
-        <v-col cols="12" lg="3">
-            <div v-for="category in categories" :key="category.id" class="mb-2">
-                <p
-                    v-if="category.products.length > 0"
-                    class="ma-0 d-inline-flex align-center ga-2"
-                >
-                    Your {{ category.category_name }} has a low stock
-                    <v-icon color="warning">mdi-circle</v-icon>
-                </p>
-            </div>
+        <v-col
+            cols="12"
+            sm="4"
+            lg="3"
+            v-for="category in categories"
+            :key="category.id"
+        >
+            <p
+                v-if="
+                    category.products.length < 5 &&
+                    category.products.length != 0
+                "
+            >
+                Your {{ category.category_name }} has a low stock
+                <v-icon color="warning">mdi-circle</v-icon>
+            </p>
         </v-col>
 
         <v-col cols="12">
