@@ -8,13 +8,20 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 
 //Public Routes
 
 //Login
 Route::get('/', function(){
+
+     if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+
     return Inertia::render('Auth/Login');
 })->name('login');
+
 //User validation
 Route::post('/login',  [AuthController::class, 'login'])->name('user.login');
 
