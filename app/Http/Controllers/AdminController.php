@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -15,13 +16,16 @@ class AdminController extends Controller
                 $query->where('firstName', 'like', '%' . request('search') . '%')
                       ->orWhere('lastName', 'like', '%' . request('search') . '%')
                       ->orWhere('email', 'like', '%' . request('search') . '%');
-            }
+                   }
         })
-            ->paginate(10);
+         ->paginate(10);
+
+        $categories = Category::with('products')->get();
 
         return Inertia::render('AdminDashboard',
          [
-            'users'=> $users
+            'users'=> $users,
+            'categories' => $categories,
 
         ]);
 

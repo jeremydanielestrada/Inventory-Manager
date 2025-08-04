@@ -2,9 +2,11 @@
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
 import PaginationLinks from "@/Components/PaginationLinks.vue";
 import { useForm, router } from "@inertiajs/vue3";
+import { useDisplay } from "vuetify";
 
-defineProps({
+const props = defineProps({
     users: Object,
+    categories: Object,
 });
 
 const params = route().params;
@@ -12,6 +14,8 @@ const params = route().params;
 const form = useForm({
     search: params.search,
 });
+
+const { mobile } = useDisplay();
 
 const search = () => {
     router.get(route("admin.index"), {
@@ -24,6 +28,18 @@ const refreshFilter = () => {
         search: null,
     });
 };
+
+//Get category color
+function getCategoryColor(category) {
+    const colorMap = {
+        "Category 1": "teal-accent-3",
+        "Category 2": "cyan-accent-3",
+        "Category 3": "light-blue-accent-3",
+    };
+    return colorMap[category];
+}
+
+console.log(props.categories);
 </script>
 
 <template>
@@ -45,12 +61,43 @@ const refreshFilter = () => {
                 ></v-text-field>
             </v-form>
         </v-col>
+
         <v-col cols="4" sm="6" md="8" lg="9" class="d-flex align-center">
             <v-btn icon size="30" @click="refreshFilter">
                 <v-icon>mdi-refresh</v-icon>
             </v-btn>
         </v-col>
 
+        <v-col cols="12" sm="6" lg="12">
+            <v-card title="Progress Data">
+                <v-card-text class="d-flex align-center justify-space-around">
+                    <div
+                        v-for="category in categories"
+                        :key="category.id"
+                        class="d-flex flex-column align-center"
+                    >
+                        <v-progress-circular
+                            :model-value="category.products.length"
+                            :rotate="360"
+                            :size="mobile ? 80 : 200"
+                            :width="mobile ? 10 : 20"
+                            :color="
+                                category.products.length === 0
+                                    ? 'grey'
+                                    : getCategoryColor(category.category_name)
+                            "
+                        >
+                            {{ category.products.length }}
+                        </v-progress-circular>
+                        <v-chip
+                            :color="getCategoryColor(category.category_name)"
+                            class="ma-2"
+                            >{{ category.category_name }}</v-chip
+                        >
+                    </div>
+                </v-card-text>
+            </v-card>
+        </v-col>
         <v-col cols="12" sm="6" lg="12" md="12">
             <div v-if="users.data.length">
                 <v-table hover>
