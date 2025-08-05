@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,19 @@ class AdminController extends Controller
         })
          ->paginate(10);
 
-        $categories = Category::with('products')->get();
+       $categories = Category::withCount('products')->get();
+
+        $totalProducts = Product::count();
+
+
+    // Add percent to each category
+    $categories->transform(function ($category) use ($totalProducts) {
+        $category->percentage = $totalProducts > 0
+            ? round(($category->products_count / $totalProducts) * 100, 2)
+            : 0;
+
+        return $category;
+    });
 
         return Inertia::render('AdminDashboard',
          [

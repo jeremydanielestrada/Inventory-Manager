@@ -38,6 +38,8 @@ function getCategoryColor(category) {
     };
     return colorMap[category];
 }
+
+console.log(props.categories);
 </script>
 
 <template>
@@ -76,17 +78,17 @@ function getCategoryColor(category) {
                         class="d-flex flex-column align-center"
                     >
                         <v-progress-circular
-                            :model-value="category.products.length"
+                            :model-value="category.percentage"
                             :rotate="360"
                             :size="mobile ? 80 : 200"
                             :width="mobile ? 10 : 20"
                             :color="
-                                category.products.length === 0
+                                category.percentage === 0
                                     ? 'grey'
                                     : getCategoryColor(category.category_name)
                             "
                         >
-                            {{ category.products.length }}
+                            {{ category.percentage }} %
                         </v-progress-circular>
                         <v-chip
                             :color="getCategoryColor(category.category_name)"
