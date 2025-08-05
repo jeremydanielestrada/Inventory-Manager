@@ -38,8 +38,6 @@ function getCategoryColor(category) {
     };
     return colorMap[category];
 }
-
-console.log(props.categories);
 </script>
 
 <template>
@@ -68,12 +66,13 @@ console.log(props.categories);
             </v-btn>
         </v-col>
 
-        <v-col cols="12" sm="6" lg="12">
+        <v-col cols="12" sm="12" lg="12" md="12">
             <v-card title="Progress Data">
                 <v-card-text class="d-flex align-center justify-space-around">
                     <div
                         v-for="category in categories"
                         :key="category.id"
+                        s
                         class="d-flex flex-column align-center"
                     >
                         <v-progress-circular
@@ -98,7 +97,7 @@ console.log(props.categories);
                 </v-card-text>
             </v-card>
         </v-col>
-        <v-col cols="12" sm="6" lg="12" md="12">
+        <v-col cols="12" sm="12" lg="12" md="12" xs="6">
             <div v-if="users.data.length">
                 <v-table hover>
                     <thead>
@@ -112,8 +111,8 @@ console.log(props.categories);
                     </thead>
                     <tbody>
                         <tr v-for="user in users.data" :key="user.id">
-                            <td class="d-flex flex-column" ga-2>
-                                <p class="mt-2">
+                            <td class="d-flex flex-column ga-2 mt-4">
+                                <p>
                                     {{ user.firstName + " " + user.lastName }}
                                 </p>
 
