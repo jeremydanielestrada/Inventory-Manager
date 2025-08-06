@@ -23,7 +23,7 @@ class AdminController extends Controller
 
        $categories = Category::withCount('products')->get();
 
-        $totalProducts = Product::count();
+       $totalProducts = Product::count();
 
 
     // Add percent to each category

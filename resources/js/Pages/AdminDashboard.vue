@@ -38,8 +38,6 @@ function getCategoryColor(category) {
     };
     return colorMap[category];
 }
-
-console.log(props.categories);
 </script>
 
 <template>
@@ -101,7 +99,7 @@ console.log(props.categories);
         </v-col>
         <v-col cols="12" sm="12" lg="12" md="12" xs="6">
             <div v-if="users.data.length">
-                <v-table hover>
+                <v-table>
                     <thead>
                         <tr class="bg-teal-lighten-4">
                             <th class="text-left">Name</th>

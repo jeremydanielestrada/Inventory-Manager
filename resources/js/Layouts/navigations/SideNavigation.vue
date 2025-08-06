@@ -2,11 +2,14 @@
 import { watch, inject, computed } from "vue";
 import { useDisplay } from "vuetify";
 import { router } from "@inertiajs/vue3";
+import { usePage } from "@inertiajs/vue3";
 
 //Inject variables value
 const isDrawerVisible = inject("isDrawerVisible");
 //Utilize pre-defined functions
 const { mobile } = useDisplay();
+
+const { auth } = usePage().props;
 
 // Computed properties to check active routes
 const isCategoryActive = computed(() => route().current("categories"));
@@ -37,6 +40,25 @@ const toAdminDashboard = () => router.get(route("admin.index"));
         width="325"
         border
     >
+        <div class="ma-3 d-flex align-center ga-3">
+            <div>
+                <h3>{{ auth.user.firstName + " " + auth.user.lastName }}</h3>
+                <small class="text-disabled">{{ auth.user.email }}</small>
+            </div>
+
+            <v-avatar size="50">
+                <v-img
+                    :src="
+                        auth.user.image
+                            ? `/storage/${auth.user.image}`
+                            : '/storage/avatar/default-avatar.png'
+                    "
+                    cover
+                >
+                </v-img>
+            </v-avatar>
+        </div>
+        <v-divider></v-divider>
         <v-list>
             <v-list-item
                 prepend-icon="mdi-folder-plus-outline"
