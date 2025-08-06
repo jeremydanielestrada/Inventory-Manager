@@ -29,6 +29,9 @@ const toDashboard = () => router.get(route("dashboard"));
 
 //to admin dashboard
 const toAdminDashboard = () => router.get(route("admin.index"));
+
+//to profile
+const toProfile = () => router.get(route("profile.index"));
 </script>
 
 <template>
@@ -40,7 +43,10 @@ const toAdminDashboard = () => router.get(route("admin.index"));
         width="325"
         border
     >
-        <div class="ma-3 d-flex align-center ga-3">
+        <div
+            class="ma-3 d-flex align-center ga-3 cursor-pointer"
+            @click="toProfile"
+        >
             <div>
                 <h3>{{ auth.user.firstName + " " + auth.user.lastName }}</h3>
                 <small class="text-disabled">{{ auth.user.email }}</small>

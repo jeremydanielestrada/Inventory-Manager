@@ -11,7 +11,7 @@ class ProfileController extends Controller
         $User = $request->user();
 
 
-        return Inertia::render("SideNavigation", [
+        return Inertia::render("Profile", [
             "user"=> $User,
         ]);
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
 //Public Routes
@@ -55,6 +56,12 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 //UserDashboard
 Route::get('/dashboard',[ UserDashboardController::class,'index'])->name('dashboard');
+
+
+//Profile
+Route::get('/profile',[ ProfileController::class,'index'])->name('profile.index');
+
+
 
 });
 
