@@ -60,6 +60,8 @@ Route::get('/dashboard',[ UserDashboardController::class,'index'])->name('dashbo
 
 //Profile
 Route::get('/profile',[ ProfileController::class,'index'])->name('profile.index');
+Route::put('/profile',[ ProfileController::class,'image'])->name('profile.image');
+
 
 
 
