@@ -214,7 +214,7 @@ const onSubmit = () => {
                                 chips
                                 @change="onPreview"
                                 @click:clear="onPreviewReset"
-                                :error-messages="formData.errors.image"
+                                :error-messages="formData.errors.image_path"
                             ></v-file-input>
                         </v-col>
                         <v-btn

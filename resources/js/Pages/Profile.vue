@@ -1,18 +1,22 @@
 <script setup>
 import SideNavigation from "@/Layouts/navigations/SideNavigation.vue";
+import PictureForm from "./Profile/PictureForm.vue";
+import ProfileForm from "./Profile/ProfileForm.vue";
+import PasswordForm from "./Profile/PasswordForm.vue";
+import AlertNotifications from "@/Components/common/AlertNotifications.vue";
 import { usePage } from "@inertiajs/vue3";
 const { auth } = usePage().props;
 
 const props = defineProps({
     user: Object,
+    status: String,
 });
-
-console.log(props.user);
 </script>
 
 <template>
     <Head title="Profile" />
     <SideNavigation />
+    <AlertNotifications :status="status"></AlertNotifications>
 
     <v-container>
         <v-card class="mb-5">
@@ -86,6 +90,19 @@ console.log(props.user);
                 <v-card class="mb-5" title="Profile Picture">
                     <v-card-text>
                         <!-- Edit pofile -->
+                        <PictureForm></PictureForm>
+                    </v-card-text>
+                </v-card>
+
+                <v-card class="mb-5" title="Profile Information">
+                    <v-card-text>
+                        <ProfileForm></ProfileForm>
+                    </v-card-text>
+                </v-card>
+
+                <v-card class="mb-5" title="Profile Information">
+                    <v-card-text>
+                        <PasswordForm></PasswordForm>
                     </v-card-text>
                 </v-card>
             </v-col>

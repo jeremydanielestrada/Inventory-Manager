@@ -60,7 +60,9 @@ Route::get('/dashboard',[ UserDashboardController::class,'index'])->name('dashbo
 
 //Profile
 Route::get('/profile',[ ProfileController::class,'index'])->name('profile.index');
-Route::put('/profile',[ ProfileController::class,'image'])->name('profile.image');
+Route::post('/profile/image',[ ProfileController::class,'image'])->name('profile.image');
+Route::put('/profile/update',[ ProfileController::class,'update'])->name('profile.update');
+Route::put('/profile/password',[ ProfileController::class,'password'])->name('profile.password');
 
 
 
