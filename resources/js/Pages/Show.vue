@@ -16,8 +16,6 @@ const props = defineProps({
 
 const theme = useTheme();
 
-const currentTheme = ref(theme.global.name.value);
-
 const { mobile } = useDisplay();
 
 const isDialogVisible = ref(false);
