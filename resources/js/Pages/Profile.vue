@@ -71,7 +71,6 @@ const props = defineProps({
 
                         <div class="text-center">
                             <h4 class="my-2">
-                                <b>Fullname:</b>
                                 {{
                                     auth.user.firstName +
                                     " " +
@@ -79,7 +78,7 @@ const props = defineProps({
                                 }}
                             </h4>
                             <h4 class="my-2">
-                                <b>Email:</b> {{ auth.user.email }}
+                                {{ auth.user.email }}
                             </h4>
                         </div>
                     </v-card-text>
