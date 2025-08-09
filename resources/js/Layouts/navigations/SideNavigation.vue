@@ -67,7 +67,7 @@ const toProfile = () => router.get(route("profile.index"));
         <v-divider></v-divider>
         <v-list>
             <v-list-item
-                prepend-icon="mdi-folder-plus-outline"
+                prepend-icon="mdi-cart"
                 title="Products"
                 link
                 @click="toProducts"
@@ -76,7 +76,7 @@ const toProfile = () => router.get(route("profile.index"));
             />
 
             <v-list-item
-                prepend-icon="mdi-folder-plus-outline"
+                prepend-icon="mdi-view-dashboard"
                 title="Dashboard"
                 link
                 @click="toDashboard"
@@ -85,7 +85,7 @@ const toProfile = () => router.get(route("profile.index"));
             />
 
             <v-list-item
-                prepend-icon="mdi-folder-plus-outline"
+                prepend-icon="mdi-account-details"
                 title="Admin Dashboard"
                 link
                 @click="toAdminDashboard"
@@ -95,7 +95,7 @@ const toProfile = () => router.get(route("profile.index"));
             />
 
             <v-list-item
-                prepend-icon="mdi-folder-plus-outline"
+                prepend-icon="mdi-tag"
                 title="Add new category"
                 link
                 @click="toCategory"

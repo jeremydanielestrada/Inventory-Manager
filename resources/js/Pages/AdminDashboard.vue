@@ -46,7 +46,6 @@ function getCategoryColor(category) {
 
     <v-row>
         <v-col cols="8" sm="6" md="4" lg="3">
-            <h3>Users</h3>
             <v-form @submit.prevent="search">
                 <v-text-field
                     type="search"

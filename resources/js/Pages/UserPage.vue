@@ -31,11 +31,32 @@ const refreshFilter = () => {
         })
     );
 };
+
+const items = [
+    {
+        title: "Table",
+        disabled: false,
+        href: route("admin.index"),
+    },
+
+    {
+        title: "Products",
+        disabled: true,
+    },
+];
 </script>
 
 <template>
     <Head :title="`${user.firstName}'s Products `" />
     <SideNavigation />
+
+    <span class="text-h6 font-weight-bold">
+        <v-breadcrumbs :items="items">
+            <template #prepend>
+                <v-icon icon="mdi-account" size="small" class="me-1"></v-icon>
+            </template>
+        </v-breadcrumbs>
+    </span>
 
     <v-row>
         <v-col cols="8" sm="6" md="4" lg="3">

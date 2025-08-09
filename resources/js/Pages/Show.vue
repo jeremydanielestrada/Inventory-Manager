@@ -27,11 +27,15 @@ const isConfirmDialogVisible = ref(false);
 const onDelete = () => {
     router.delete(route("products.delete", props.product.id));
 };
+
+const backOne = () => window.history.back();
 </script>
 
 <template>
     <Head title="Product Detail" />
     <SideNavigation></SideNavigation>
+
+    <v-icon size="30" @click="backOne">mdi-keyboard-backspace</v-icon>
 
     <v-card :width="!mobile ? 800 : 350" class="mx-auto">
         <v-card-title>
@@ -90,6 +94,7 @@ const onDelete = () => {
             </div>
         </v-card-actions>
     </v-card>
+
     <ProductsFormDialog
         v-model:isDialogVisible="isDialogVisible"
         :productData="product"
@@ -103,7 +108,7 @@ const onDelete = () => {
     ></ConfirmDialog>
 </template>
 
-<style>
+<style scoped>
 .f-weight {
     font-weight: 600;
 }

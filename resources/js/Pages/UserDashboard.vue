@@ -14,7 +14,7 @@ const props = defineProps({
 
 const isDialogVisible = ref(false);
 
-console.log(props.products.data);
+console.log(props.categories);
 </script>
 
 <template>
@@ -35,8 +35,7 @@ console.log(props.products.data);
         >
             <p
                 v-if="
-                    category.products.length < 5 &&
-                    category.products.length != 0
+                    category.products_count < 5 && category.products_count != 0
                 "
             >
                 Your {{ category.category_name }} has a low stock

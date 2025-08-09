@@ -12,7 +12,11 @@ class UserDashboardController extends Controller
 
 
         $products = $request->user()->products()->latest()->paginate(10);
-        $categories = Category::with("products")->get();
+
+        $categories = Category::withCount(['products' => function ($query) use ($request) {
+                 $query->where('user_id', $request->user()->id);
+                 }])->get();
+
 
         return inertia::render('UserDashboard',[
         'products' => $products,
