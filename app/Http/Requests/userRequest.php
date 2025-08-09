@@ -34,7 +34,7 @@ class userRequest extends FormRequest
             "firstName"      => "required|string|max:255",
             "lastName"       => "required|string|max:255",
             "role"           => "nullable|string",
-            "email"          => "required|string|email|unique:App\Models\Use55r,email|max:2",
+            "email"          => "required|string|email|unique:App\Models\User,email|max:255",
             "password"       => "required|min:8|confirmed",
 
         ];

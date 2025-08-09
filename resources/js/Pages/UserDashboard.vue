@@ -13,6 +13,8 @@ const props = defineProps({
 });
 
 const isDialogVisible = ref(false);
+
+console.log(props.products.data);
 </script>
 
 <template>
