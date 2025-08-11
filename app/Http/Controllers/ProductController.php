@@ -21,7 +21,7 @@ class ProductController extends Controller
        $products = Product::with('category')
        ->filter(request(['search', 'category']))
        ->latest()
-       ->paginate(5)
+       ->paginate(10)
        ->withQueryString();
 
        return Inertia::render('Products',
