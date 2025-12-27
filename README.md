@@ -1,61 +1,217 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Inventory Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple and modern inventory management system built with Laravel 12, Vue.js 3, and Vuetify. 
 
-## About Laravel
+## 📋 Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is a full-stack inventory management application designed to help businesses track and manage their inventory efficiently. It features a modern, responsive UI and robust backend capabilities.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Backend
+- **Laravel 12** - PHP framework for web artisans
+- **PHP 8.2+** - Modern PHP version
+- **Laravel Sanctum** - API authentication
+- **Laravel Tinker** - Powerful REPL for Laravel
 
-## Learning Laravel
+### Frontend
+- **Vue.js 3** - Progressive JavaScript framework
+- **Inertia.js** - Modern monolith approach
+- **Vuetify 3** - Material Design component framework
+- **Pinia** - State management for Vue
+- **TailwindCSS 3** - Utility-first CSS framework
+- **Material Design Icons** - Icon library
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Development Tools
+- **Vite** - Next generation frontend tooling
+- **Laravel Breeze** - Minimal authentication scaffolding
+- **Laravel Pail** - Log viewer
+- **Laravel Pint** - PHP code style fixer
+- **PHPUnit** - PHP testing framework
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Inventory Tracking** - Manage products, quantities, and stock levels
+- **Modern UI** - Responsive design with Material Design components
+- **Authentication** - Secure user authentication with Laravel Sanctum
+- **Real-time Updates** - Reactive Vue.js interface
+- **API Support** - RESTful API with Sanctum authentication
 
-## Laravel Sponsors
+## 📦 Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Prerequisites
 
-### Premium Partners
+- PHP 8.2 or higher
+- Composer
+- Node.js & NPM
+- MySQL/PostgreSQL/SQLite (your preferred database)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Setup Instructions
 
-## Contributing
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jeremydanielestrada/Inventory-Manager.git
+   cd Inventory-Manager
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-## Code of Conduct
+3. **Install JavaScript dependencies**
+   ```bash
+   npm install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+5. **Configure your database**
+   
+   Edit the `.env` file and set your database credentials:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=inventory_manager
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Run database migrations**
+   ```bash
+   php artisan migrate
+   ```
 
-## License
+7. **Build frontend assets**
+   ```bash
+   npm run build
+   # or for development
+   npm run dev
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+8. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
+
+   The application will be available at `http://localhost:8000`
+
+## 🛠️ Development
+
+### Running the Development Environment
+
+For a complete development experience with all services running concurrently:
+
+```bash
+composer dev
+```
+
+This will start:
+- Laravel development server
+- Queue worker
+- Log viewer (Pail)
+- Vite development server
+
+### Individual Commands
+
+```bash
+# Start Laravel server
+php artisan serve
+
+# Start Vite dev server
+npm run dev
+
+# Run queue worker
+php artisan queue:listen
+
+# View logs
+php artisan pail
+```
+
+### Code Style
+
+Format your PHP code using Laravel Pint:
+```bash
+./vendor/bin/pint
+```
+
+### Testing
+
+Run the test suite:
+```bash
+composer test
+# or
+php artisan test
+```
+
+## 📁 Project Structure
+
+```
+├── app/              # Application logic (Controllers, Models, etc.)
+├── bootstrap/        # Framework bootstrap files
+├── config/           # Configuration files
+├── database/         # Migrations, factories, and seeders
+├── public/           # Public assets and entry point
+├── resources/        # Views, raw assets, and frontend code
+│   ├── js/          # Vue.js components and JavaScript
+│   └── views/       # Blade templates
+├── routes/           # Application routes
+├── storage/          # Compiled files, logs, and uploads
+└── tests/            # Automated tests
+```
+
+## 🔐 Authentication
+
+This application uses Laravel Breeze with Inertia.js for authentication. Available authentication features:
+
+- User registration
+- Login/Logout
+- Password reset
+- Email verification
+- API authentication via Sanctum
+
+## 📝 API Documentation
+
+API endpoints are protected using Laravel Sanctum. To authenticate:
+
+1. Obtain an API token through the authentication endpoint
+2. Include the token in your requests:
+   ```
+   Authorization: Bearer YOUR_TOKEN_HERE
+   ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 👤 Author
+
+**Jeremy Daniel Estrada**
+- GitHub: [@jeremydanielestrada](https://github.com/jeremydanielestrada)
+
+## 🐛 Issues
+
+Found a bug or have a feature request? Please [open an issue](https://github.com/jeremydanielestrada/Inventory-Manager/issues).
+
+## 📮 Support
+
+If you need help or have questions, please open an issue in the GitHub repository.
+
+---
+
+Made with ❤️ using Laravel and Vue.js
